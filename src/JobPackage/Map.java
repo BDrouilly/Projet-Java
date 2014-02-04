@@ -3,29 +3,32 @@
  * and open the template in the editor.
  */
 package JobPackage;
-
 import java.sql.*;
-
-import DataLayer.DatabaseHandler;
-
 /**
  *
  * @author Alexis
  */
 public class Map {
     
-    private String query;
-    private DatabaseHandler dh;
+    int ID;
+    String Name;
+    String URL;
+    MappingMap mapping;
     
-    public Map() {
-        this.dh = new DatabaseHandler();
+    public Map(int ID) {
+        this.ID = ID;
+        mapping = new MappingMap();
+        ResultSet result = mapping.getMapById(this.ID);
+        try { // RECUPERE LE NOM ET L'URL
+        result.next();
+        this.Name = result.getString("Map_Name");
+        this.URL = result.getString("Map_Picture");
+        } catch (Exception e) {}
     }
     
-    public ResultSet LoadMap(int ID) {
+    public String getURL(){
         
-         this.query = "SELECT Map_Picture FROM TB_Map WHERE Map_ID =" + ID; // recupère l'ID selectionner
-         return dh.getRows(this.query);
-         
+        return this.URL;
     }
-    
+            
 }

@@ -4,6 +4,7 @@
  */
 package GUI;
 import JobPackage.*;
+import java.sql.*;
 /**
  *
  * @author Alexis
@@ -14,36 +15,32 @@ public class Window extends javax.swing.JFrame {
      * Creates new form Window
      */
     
-       private Map map;
+    private MappingMap mapping;
+    private int ID[];
+    private String Name[];
+    private int i = 0;
     
     public Window() {
         initComponents();
-        map = new Map(); // objet Map
+        mapping = new MappingMap(); // objet MappingMap
+        this.makeListOfMaps();
     }
     
-    public int ChooseMap() {
-        /**
-         * TODO pas fini !
-         */
-        int ID = 0;
-        
-        return ID;
+    public void makeListOfMaps() { // RECUPERE LES INFOS SUR LES MAPS ET REMPLIE LES TABLEAUX
+        ResultSet result =  mapping.getMap();
+        try { 
+            while(result.next()) {
+                this.Name[this.i] = result.getString("Map_Name");
+                this.ID[this.i] = result.getInt("Map_ID");
+            }
+        } catch (Exception e) {}
     }
     
-    public void ShowMap()
+    public void showMap()
     {
         /**
-         * TODO pas fini non plus !
+         * TODO UGO c'est la focntion qui va mettre l'image dans ton label!
          */
-        int ID = 0;
-        
-        
-        
-        if(ID != 0)
-        {
-        map.LoadMap(ID);
-        }
-        
         
     }
 
@@ -167,11 +164,11 @@ public class Window extends javax.swing.JFrame {
         Map_Panel.setLayout(Map_PanelLayout);
         Map_PanelLayout.setHorizontalGroup(
             Map_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 321, Short.MAX_VALUE)
         );
         Map_PanelLayout.setVerticalGroup(
             Map_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 298, Short.MAX_VALUE)
         );
 
         Research_Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
