@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package GUI;
-
+import JobPackage.*;
 /**
  *
  * @author Alexis
@@ -13,8 +13,37 @@ public class Window extends javax.swing.JFrame {
     /**
      * Creates new form Window
      */
+    
+       private Map map;
+    
     public Window() {
         initComponents();
+        map = new Map(); // objet Map
+    }
+    
+    public int ChooseMap() {
+        /**
+         * TODO pas fini !
+         */
+        int ID = 0;
+        
+        return ID;
+    }
+    
+    public void ShowMap()
+    {
+        /**
+         * TODO pas fini non plus !
+         */
+        int ID = 0;
+        
+        
+        
+        if(ID != 0)
+        {
+        map.LoadMap(ID);
+        }
+        
         
     }
 

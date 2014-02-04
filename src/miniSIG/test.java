@@ -1,7 +1,6 @@
 package miniSIG;
 
 import java.sql.*;
-import mapping.*;
 import GUI.*;
 
 public class test {
