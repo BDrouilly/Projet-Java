@@ -96,21 +96,18 @@ public class MappingPoi {
             System.out.println("requete de recherche utilisée:"+sql);
             return db.getRows(sql);//on execute la requete
       
-    }
-        
-        
-        
-        
+    }  
 	/**
 	 * add a new POI into 
 	 * @param name
 	 * @param x
 	 * @param y
 	 */
-	public void setNew(String name, int x, int y){
-		
-	}
-	public void setNew(String name, int x, int y, String label, String test){
+	public void setNew(String name, int x, int y, int mapId){
+		this.query ="INSERT INTO TB_POI(MAP_ID, POI_NAME, POI_X, POI_Y) " +
+				"VALUES(" + mapId + ", '" + name + ", " + x + ", " + y + ")";
+	} 
+	public void setNew(String name, int x, int y, String label, String text){
 		
 	}
 	public void setNewPoiPicture(int poiId, String pictureUrl){
