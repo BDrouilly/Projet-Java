@@ -22,9 +22,9 @@ public class DatabaseHandler {
 			/**
 			 * TODO : Add db name
 			 */
-			this.connectionString = "jdbc:mysql://localhost/";
+			this.connectionString = "jdbc:mysql://localhost:3306/minisig";
 			this.user = "root";
-			this.pass = "13853211";
+			this.pass = "";
 			
 			this.connection = DriverManager.getConnection(this.connectionString, this.user, this.pass);
 			

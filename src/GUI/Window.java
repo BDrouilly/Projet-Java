@@ -5,6 +5,8 @@
 package GUI;
 import JobPackage.*;
 import java.sql.*;
+import javax.swing.JMenuItem;
+import java.util.ArrayList;
 /**
  *
  * @author Alexis
@@ -14,26 +16,49 @@ public class Window extends javax.swing.JFrame {
     /**
      * Creates new form Window
      */
-    
+    //private Object MapList[];
+    private ArrayList<JMenuItem> MapList;
     private MappingMap mapping;
-    private int ID[];
-    private String Name[];
-    private int i = 0;
-    
+    private int ID[]; // REMPLACER PAR UN ARRAYLIST
+    private String Name[]; // REMPLACER PAR UN ARRAYLIST AUSSI
+    private int i;
+    private ArrayList<String> Names;
+    private ArrayList<Integer> IDs;
     public Window() {
         initComponents();
         mapping = new MappingMap(); // objet MappingMap
+        Names = new ArrayList<String>();
+        IDs = new ArrayList<Integer>();
+        MapList = new ArrayList<JMenuItem>();
         this.makeListOfMaps();
+        this.showListOfMapsInMenuBar();
+        
     }
     
     public void makeListOfMaps() { // RECUPERE LES INFOS SUR LES MAPS ET REMPLIE LES TABLEAUX
         ResultSet result =  mapping.getMap();
-        try { 
+        try {
+
             while(result.next()) {
-                this.Name[this.i] = result.getString("Map_Name");
-                this.ID[this.i] = result.getInt("Map_ID");
-            }
-        } catch (Exception e) {}
+
+               Names.add(result.getString("MAP_NAME"));
+               IDs.add(result.getInt("MAP_ID"));
+             }
+
+         } catch (Exception e) { System.out.println("makeListOfMaps a chié"); e.printStackTrace();}
+    }
+    
+    public void showListOfMapsInMenuBar() {
+         
+
+        try {
+        for(i = 0; i < IDs.size(); i++) {
+            MapList.add(new JMenuItem(Names.get(i)));
+            Menu_Lieux.add(MapList.get(i));
+        }
+        } catch(Exception e) {e.printStackTrace();}
+        
+        
     }
     
     public void showMap()
@@ -43,7 +68,7 @@ public class Window extends javax.swing.JFrame {
          */
         
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
