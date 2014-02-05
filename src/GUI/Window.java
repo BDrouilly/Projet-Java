@@ -93,9 +93,31 @@ public class Window extends javax.swing.JFrame {
         Button_DelPOI = new javax.swing.JButton();
         Button_Prev = new javax.swing.JButton();
         Button_Next = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        Add_Panel = new javax.swing.JTabbedPane();
         jToolBar1 = new javax.swing.JToolBar();
+        Consult_Panel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Text_Information = new javax.swing.JTextArea();
+        Info_1 = new javax.swing.JLabel();
+        Info_2 = new javax.swing.JLabel();
+        Info_3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        Info_4 = new javax.swing.JLabel();
         jToolBar2 = new javax.swing.JToolBar();
+        jPanel2 = new javax.swing.JPanel();
+        Write_Nom = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        Wrtie_Address = new javax.swing.JTextField();
+        Write_Info1 = new javax.swing.JTextField();
+        Write_Info2 = new javax.swing.JTextField();
+        Write_Info3 = new javax.swing.JTextField();
+        Button_Add = new javax.swing.JButton();
         MenuBar = new javax.swing.JMenuBar();
         Menu_Lieux = new javax.swing.JMenu();
         Menu_POI = new javax.swing.JMenu();
@@ -106,6 +128,7 @@ public class Window extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(600, 400));
 
         Map_Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -117,7 +140,7 @@ public class Window extends javax.swing.JFrame {
         );
         Map_PanelLayout.setVerticalGroup(
             Map_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 298, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         Research_Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
@@ -136,7 +159,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(Research_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SearchBar)
-                    .addComponent(Scroll_Research, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
+                    .addComponent(Scroll_Research))
                 .addContainerGap())
         );
         Research_PanelLayout.setVerticalGroup(
@@ -205,10 +228,147 @@ public class Window extends javax.swing.JFrame {
         );
 
         jToolBar1.setRollover(true);
-        jTabbedPane1.addTab("Consulter", jToolBar1);
+
+        Text_Information.setColumns(20);
+        Text_Information.setRows(5);
+        jScrollPane2.setViewportView(Text_Information);
+
+        Info_1.setText("Info_1");
+
+        Info_2.setText("Info_2");
+
+        Info_3.setText("Info_3");
+
+        jLabel4.setText("Information POI");
+
+        Info_4.setText("Info_4");
+
+        javax.swing.GroupLayout Consult_PanelLayout = new javax.swing.GroupLayout(Consult_Panel);
+        Consult_Panel.setLayout(Consult_PanelLayout);
+        Consult_PanelLayout.setHorizontalGroup(
+            Consult_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Consult_PanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Consult_PanelLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(Consult_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Info_4)
+                    .addComponent(Info_3)
+                    .addComponent(Info_2)
+                    .addComponent(Info_1))
+                .addGap(68, 68, 68))
+            .addGroup(Consult_PanelLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        Consult_PanelLayout.setVerticalGroup(
+            Consult_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Consult_PanelLayout.createSequentialGroup()
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(Info_1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Info_2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Info_3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Info_4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jToolBar1.add(Consult_Panel);
+
+        Add_Panel.addTab("Consulter", jToolBar1);
 
         jToolBar2.setRollover(true);
-        jTabbedPane1.addTab("Ajouter", jToolBar2);
+
+        jLabel1.setText("Nom");
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea2.setRows(5);
+        jTextArea2.setText("Description");
+        jScrollPane3.setViewportView(jTextArea2);
+
+        jLabel2.setText("Adresse");
+
+        jLabel3.setText("Info 1");
+
+        jLabel5.setText("Info 2");
+
+        jLabel6.setText("Info 3");
+
+        Button_Add.setText("Ajouter");
+        Button_Add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_AddActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Write_Nom, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                    .addComponent(Wrtie_Address)
+                    .addComponent(Write_Info1)
+                    .addComponent(Write_Info2)
+                    .addComponent(Write_Info3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(Button_Add)
+                .addContainerGap(110, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(Write_Nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(Wrtie_Address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(Write_Info1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(Write_Info2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(Write_Info3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Button_Add)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jToolBar2.add(jPanel2);
+
+        Add_Panel.addTab("Ajouter", jToolBar2);
 
         Menu_Lieux.setText("Lieux");
         MenuBar.add(Menu_Lieux);
@@ -230,12 +390,10 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Map_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Navigation_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Research_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTabbedPane1))
+                    .addComponent(Add_Panel)
+                    .addComponent(Research_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -244,7 +402,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Map_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTabbedPane1))
+                    .addComponent(Add_Panel))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Navigation_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -261,16 +419,27 @@ public class Window extends javax.swing.JFrame {
 
     }//GEN-LAST:event_Button_AddPOIActionPerformed
 
+    private void Button_AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_AddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Button_AddActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane Add_Panel;
+    private javax.swing.JButton Button_Add;
     private javax.swing.JButton Button_AddPOI;
     private javax.swing.JButton Button_DelPOI;
     private javax.swing.JButton Button_Next;
     private javax.swing.JButton Button_Prev;
     private javax.swing.JComboBox Combo_Interface;
+    private javax.swing.JPanel Consult_Panel;
+    private javax.swing.JLabel Info_1;
+    private javax.swing.JLabel Info_2;
+    private javax.swing.JLabel Info_3;
+    private javax.swing.JLabel Info_4;
     private javax.swing.JPanel Map_Panel;
     private javax.swing.JMenuBar MenuBar;
     public javax.swing.JMenu Menu_Help;
@@ -281,9 +450,24 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextArea Result_Research;
     private javax.swing.JScrollPane Scroll_Research;
     public javax.swing.JTextField SearchBar;
+    private javax.swing.JTextArea Text_Information;
+    private javax.swing.JTextField Write_Info1;
+    private javax.swing.JTextField Write_Info2;
+    private javax.swing.JTextField Write_Info3;
+    private javax.swing.JTextField Write_Nom;
+    private javax.swing.JTextField Wrtie_Address;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
