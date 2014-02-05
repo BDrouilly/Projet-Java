@@ -27,6 +27,11 @@ public class MappingPoi {
 		this.query = "SELECT * FROM TB_POI WHERE POI_ID = " + id;
 		return db.getRows(this.query);
 	}
+	/**
+	 * return rows for given map id
+	 * @param mapId : int
+	 * @return results : ResultSet
+	 */
 	public ResultSet getPoiByMapId(int mapId){
 		this.query = "SELECT * FROM TB_POI WHERE MAP_ID =" + mapId;
 		return db.getRows(this.query);
