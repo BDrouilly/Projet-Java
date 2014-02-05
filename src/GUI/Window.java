@@ -227,19 +227,19 @@ public class Window extends javax.swing.JFrame {
 
         Combo_Interface.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        Button_AddPOI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/addmark.PNG")));
+        Button_AddPOI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/addmark.PNG")));
         Button_AddPOI.setBorderPainted(false);
         Button_AddPOI.setContentAreaFilled(false);
 
-        Button_DelPOI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/delmark.PNG")));
+        Button_DelPOI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/delmark.PNG")));
         Button_DelPOI.setBorderPainted(false);
         Button_DelPOI.setContentAreaFilled(false);
 
-        Button_Prev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/fleche_suivant.png")));
+        Button_Prev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/fleche_suivant.png")));
         Button_Prev.setBorderPainted(false);
         Button_Prev.setContentAreaFilled(false);
 
-        Button_Next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/fleche_precedent.png")));
+        Button_Next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/fleche_precedent.png")));
         Button_Next.setBorderPainted(false);
         Button_Next.setContentAreaFilled(false);
 
