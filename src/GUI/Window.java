@@ -23,14 +23,12 @@ public class Window extends javax.swing.JFrame {
     /**
      * Creates new form Window
      */
-    //private Object MapList[];
     private ArrayList<JMenuItem> MapList;
     private MappingMap mapping;
     private int i;
     private ArrayList<String> Names;
     private ArrayList<Integer> IDs;
     
-    //JPanel Image_Panel ;
     
     private Graphics g = null;
     private Image img;
@@ -44,7 +42,6 @@ public class Window extends javax.swing.JFrame {
         MapList = new ArrayList<JMenuItem>();
         this.makeListOfMaps();
         this.showListOfMapsInMenuBar();
-       // this.showMap();
     }
     
     public void makeListOfMaps() { // RECUPERE LES INFOS SUR LES MAPS ET REMPLIE LES TABLEAUX
@@ -73,22 +70,6 @@ public class Window extends javax.swing.JFrame {
         
     }
     
-    public void showMap()
-    {
-        /**
-         * TODO UGO c'est la focntion qui va mettre l'image dans ton label!
-         */
-        
-      //  Map_Panel.paintComponents(g);
-        
-        try {
-        this.img = ImageIO.read(new File("./Saint_Pierre_De_Manneville.jpg")); 
-        this.g.drawImage(this.img,0,0,Map_Panel);
-        } catch (IOException e) {e.printStackTrace();}
-
-        
-         
-    }
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,14 +82,6 @@ public class Window extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        Information_Panel = new javax.swing.JPanel();
-        Info1 = new javax.swing.JLabel();
-        Info2 = new javax.swing.JLabel();
-        Info3 = new javax.swing.JLabel();
-        Informations_POI = new javax.swing.JLabel();
-        Scroll_Information = new javax.swing.JScrollPane();
-        Text_Information = new javax.swing.JTextArea();
-        Picture_POI = new javax.swing.JPanel();
         Map_Panel = new Panel_Picture();
         Research_Panel = new javax.swing.JPanel();
         SearchBar = new javax.swing.JTextField();
@@ -120,6 +93,9 @@ public class Window extends javax.swing.JFrame {
         Button_DelPOI = new javax.swing.JButton();
         Button_Prev = new javax.swing.JButton();
         Button_Next = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jToolBar1 = new javax.swing.JToolBar();
+        jToolBar2 = new javax.swing.JToolBar();
         MenuBar = new javax.swing.JMenuBar();
         Menu_Lieux = new javax.swing.JMenu();
         Menu_POI = new javax.swing.JMenu();
@@ -130,79 +106,6 @@ public class Window extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        Information_Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
-        Information_Panel.setPreferredSize(new java.awt.Dimension(100, 100));
-
-        Info1.setText("Info1");
-
-        Info2.setText("Info2");
-
-        Info3.setText("Info3");
-        Info3.setToolTipText("");
-
-        Informations_POI.setText("Informations POI");
-
-        Text_Information.setEditable(false);
-        Text_Information.setColumns(20);
-        Text_Information.setRows(4);
-        Scroll_Information.setViewportView(Text_Information);
-
-        Picture_POI.setPreferredSize(new java.awt.Dimension(100, 80));
-
-        javax.swing.GroupLayout Picture_POILayout = new javax.swing.GroupLayout(Picture_POI);
-        Picture_POI.setLayout(Picture_POILayout);
-        Picture_POILayout.setHorizontalGroup(
-            Picture_POILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        Picture_POILayout.setVerticalGroup(
-            Picture_POILayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout Information_PanelLayout = new javax.swing.GroupLayout(Information_Panel);
-        Information_Panel.setLayout(Information_PanelLayout);
-        Information_PanelLayout.setHorizontalGroup(
-            Information_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Information_PanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(Information_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Information_PanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(Informations_POI)
-                        .addGap(87, 87, 87))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Information_PanelLayout.createSequentialGroup()
-                        .addComponent(Scroll_Information, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(Information_PanelLayout.createSequentialGroup()
-                        .addComponent(Picture_POI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                        .addGroup(Information_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Info3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Info2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Info1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap())))
-        );
-        Information_PanelLayout.setVerticalGroup(
-            Information_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Information_PanelLayout.createSequentialGroup()
-                .addComponent(Informations_POI)
-                .addGroup(Information_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Information_PanelLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(Info1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Info2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Info3))
-                    .addGroup(Information_PanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Picture_POI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(Scroll_Information, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                .addGap(8, 8, 8))
-        );
 
         Map_Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
@@ -233,7 +136,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(Research_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SearchBar)
-                    .addComponent(Scroll_Research))
+                    .addComponent(Scroll_Research, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
                 .addContainerGap())
         );
         Research_PanelLayout.setVerticalGroup(
@@ -251,6 +154,11 @@ public class Window extends javax.swing.JFrame {
         Button_AddPOI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/addmark.PNG")));
         Button_AddPOI.setBorderPainted(false);
         Button_AddPOI.setContentAreaFilled(false);
+        Button_AddPOI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_AddPOIActionPerformed(evt);
+            }
+        });
 
         Button_DelPOI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/delmark.PNG")));
         Button_DelPOI.setBorderPainted(false);
@@ -296,6 +204,12 @@ public class Window extends javax.swing.JFrame {
                 .addGap(77, 77, 77))
         );
 
+        jToolBar1.setRollover(true);
+        jTabbedPane1.addTab("Consulter", jToolBar1);
+
+        jToolBar2.setRollover(true);
+        jTabbedPane1.addTab("Ajouter", jToolBar2);
+
         Menu_Lieux.setText("Lieux");
         MenuBar.add(Menu_Lieux);
 
@@ -316,10 +230,12 @@ public class Window extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Map_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Navigation_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Information_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
-                    .addComponent(Research_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(Research_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -328,7 +244,7 @@ public class Window extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Map_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(Information_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Navigation_Panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -338,6 +254,12 @@ public class Window extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Button_AddPOIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_AddPOIActionPerformed
+        // TODO add your handling code here:
+      //  Information_Panel.setVisible(false);
+
+    }//GEN-LAST:event_Button_AddPOIActionPerformed
 
     /**
      * @param args the command line arguments
@@ -349,25 +271,20 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton Button_Next;
     private javax.swing.JButton Button_Prev;
     private javax.swing.JComboBox Combo_Interface;
-    public javax.swing.JLabel Info1;
-    public javax.swing.JLabel Info2;
-    public javax.swing.JLabel Info3;
-    private javax.swing.JPanel Information_Panel;
-    private javax.swing.JLabel Informations_POI;
     private javax.swing.JPanel Map_Panel;
     private javax.swing.JMenuBar MenuBar;
     public javax.swing.JMenu Menu_Help;
     public javax.swing.JMenu Menu_Lieux;
     public javax.swing.JMenu Menu_POI;
     private javax.swing.JPanel Navigation_Panel;
-    private javax.swing.JPanel Picture_POI;
     private javax.swing.JPanel Research_Panel;
     private javax.swing.JTextArea Result_Research;
-    private javax.swing.JScrollPane Scroll_Information;
     private javax.swing.JScrollPane Scroll_Research;
     public javax.swing.JTextField SearchBar;
-    private javax.swing.JTextArea Text_Information;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
 }
