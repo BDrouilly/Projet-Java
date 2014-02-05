@@ -19,6 +19,7 @@ public class Poi {
 	private String link;
 	
 	public Poi(String name, String label, String text, String link, int coordX, int coordY){
+		this.poiMap = new MappingPoi();
 		this.name = name;
 		this.label = label;
 		this.text = text;
@@ -27,10 +28,11 @@ public class Poi {
 		this.coordY = coordY;
 	}
 	public Poi(int id) {
-		poiMap = new MappingPoi();
+		this.poiMap = new MappingPoi();
 		this.poiBuilder(this.poiMap.getPoiById(id));
 	}
 	public Poi() {
+		this.poiMap = new MappingPoi();
 		this.name ="";
 		this.coordX = 0;
 		this.coordY = 0;
@@ -52,6 +54,9 @@ public class Poi {
 			System.out.println("--- ERROR CREATING POI ---");
 			e.printStackTrace();
 		}
+	}
+	public void addThisToDb(){
+		this.poiMap.
 	}
 
 	/**
