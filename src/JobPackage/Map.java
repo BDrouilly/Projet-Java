@@ -23,9 +23,10 @@ public class Map {
         result.next();
         this.Name = result.getString("Map_Name");
         this.URL = result.getString("Map_Picture");
-        } catch (Exception e) {}
-    }
-    
+        } catch (Exception e) {
+        	e.printStackTrace();
+        }
+    }    
     public String getURL(){
         
         return this.URL;
