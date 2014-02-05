@@ -26,16 +26,14 @@ public class Window extends javax.swing.JFrame {
     //private Object MapList[];
     private ArrayList<JMenuItem> MapList;
     private MappingMap mapping;
-    private int ID[]; // REMPLACER PAR UN ARRAYLIST
-    private String Name[]; // REMPLACER PAR UN ARRAYLIST AUSSI
     private int i;
     private ArrayList<String> Names;
     private ArrayList<Integer> IDs;
     
     //JPanel Image_Panel ;
     
-    Graphics g = null;
-    Image img;
+    private Graphics g = null;
+    private Image img;
     
     public Window() {
         initComponents();
@@ -46,7 +44,7 @@ public class Window extends javax.swing.JFrame {
         MapList = new ArrayList<JMenuItem>();
         this.makeListOfMaps();
         this.showListOfMapsInMenuBar();
-        this.showMap();
+       // this.showMap();
     }
     
     public void makeListOfMaps() { // RECUPERE LES INFOS SUR LES MAPS ET REMPLIE LES TABLEAUX
@@ -84,7 +82,7 @@ public class Window extends javax.swing.JFrame {
       //  Map_Panel.paintComponents(g);
         
         try {
-        this.img = ImageIO.read(new File("GUI/Resources/addmark.png")); 
+        this.img = ImageIO.read(new File("./Saint_Pierre_De_Manneville.jpg")); 
         this.g.drawImage(this.img,0,0,Map_Panel);
         } catch (IOException e) {e.printStackTrace();}
 
@@ -111,7 +109,7 @@ public class Window extends javax.swing.JFrame {
         Scroll_Information = new javax.swing.JScrollPane();
         Text_Information = new javax.swing.JTextArea();
         Picture_POI = new javax.swing.JPanel();
-        Map_Panel = new javax.swing.JPanel();
+        Map_Panel = new Panel_Picture();
         Research_Panel = new javax.swing.JPanel();
         SearchBar = new javax.swing.JTextField();
         Scroll_Research = new javax.swing.JScrollPane();

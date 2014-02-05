@@ -10,10 +10,10 @@ import java.sql.*;
  */
 public class Map {
     
-    int ID;
-    String Name;
-    String URL;
-    MappingMap mapping;
+    private int ID;
+    private String Name;
+    private String URL;
+    private MappingMap mapping;
     
     public Map(int ID) {
         this.ID = ID;
