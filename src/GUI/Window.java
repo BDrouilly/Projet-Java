@@ -7,6 +7,13 @@ import JobPackage.*;
 import java.sql.*;
 import javax.swing.JMenuItem;
 import java.util.ArrayList;
+
+import java.awt.Graphics;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author Alexis
@@ -24,15 +31,22 @@ public class Window extends javax.swing.JFrame {
     private int i;
     private ArrayList<String> Names;
     private ArrayList<Integer> IDs;
+    
+    //JPanel Image_Panel ;
+    
+    Graphics g = null;
+    Image img;
+    
     public Window() {
         initComponents();
+        
         mapping = new MappingMap(); // objet MappingMap
         Names = new ArrayList<String>();
         IDs = new ArrayList<Integer>();
         MapList = new ArrayList<JMenuItem>();
         this.makeListOfMaps();
         this.showListOfMapsInMenuBar();
-        
+        this.showMap();
     }
     
     public void makeListOfMaps() { // RECUPERE LES INFOS SUR LES MAPS ET REMPLIE LES TABLEAUX
@@ -67,6 +81,15 @@ public class Window extends javax.swing.JFrame {
          * TODO UGO c'est la focntion qui va mettre l'image dans ton label!
          */
         
+      //  Map_Panel.paintComponents(g);
+        
+        try {
+        this.img = ImageIO.read(new File("GUI/Resources/addmark.png")); 
+        this.g.drawImage(this.img,0,0,Map_Panel);
+        } catch (IOException e) {e.printStackTrace();}
+
+        
+         
     }
    
     /**
