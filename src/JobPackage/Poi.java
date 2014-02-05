@@ -18,9 +18,25 @@ public class Poi {
 	private String text;
 	private String link;
 	
+	public Poi(String name, String label, String text, String link, int coordX, int coordY){
+		this.name = name;
+		this.label = label;
+		this.text = text;
+		this.link = link;
+		this.coordX = coordX;
+		this.coordY = coordY;
+	}
 	public Poi(int id) {
 		poiMap = new MappingPoi();
 		this.poiBuilder(this.poiMap.getPoiById(id));
+	}
+	public Poi() {
+		this.name ="";
+		this.coordX = 0;
+		this.coordY = 0;
+		this.label = "";
+		this.text = "";
+		this.link = "";
 	}
 	
 	private void poiBuilder(ResultSet result) {
