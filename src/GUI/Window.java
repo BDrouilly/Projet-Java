@@ -130,12 +130,12 @@ public class Window extends javax.swing.JFrame {
         public void actionPerformed(java.awt.event.ActionEvent e) {
            // e.getSource() permet de connaître la source qui a déclenché l'action
             System.out.println(e.getActionCommand());
-            for(i = 0; i < MapList.size(); i++) {
-                System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
-                if(MapList.get(i).getText() == Maps.get(i).getName()) {
-                   Map_Panel.setURL(Maps.get(i).getURL());
-                   //ResultSet rs = mappingPoi.getPoiByMapName(MapList.get(i).getText());
-                   ResultSet rs = mappingPoi.getPoiByMapId(Maps.get(i).getID());
+             for(i = 0; i < MapList.size(); i++) {
+               // System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
+                if( Maps.get(i).getName() == e.getActionCommand()) {
+                    System.out.print("TRALALALALLA");      
+                    Map_Panel.setURL(Maps.get(i).getURL());
+                    ResultSet rs = mappingPoi.getPoiByMapId(Maps.get(i).getID());
 
                    try{
                    while(rs.next())
@@ -144,9 +144,12 @@ public class Window extends javax.swing.JFrame {
                    }
                    Map_Panel.setPois(Pois);
                    }catch(Exception ex){}
+                    Map_Panel.revalidate();
+                    Map_Panel.repaint();
+                    break;
+                
                 }
             }
-            ;
             
         }
      };
