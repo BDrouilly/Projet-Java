@@ -446,7 +446,7 @@ public class Window extends javax.swing.JFrame {
         Menu_Lieux.setText("Lieux");
         Menu_Lieux.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Menu_LieuxActionPerformed(evt);
+                //Menu_LieuxActionPerformed(evt);
             }
         });
         MenuBar.add(Menu_Lieux);
@@ -518,7 +518,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel Info_2;
     private javax.swing.JLabel Info_3;
     private javax.swing.JLabel Info_4;
-    private javax.swing.JPanel Map_Panel;
+    private Panel_Picture Map_Panel;
     private javax.swing.JMenuBar MenuBar;
     public javax.swing.JMenu Menu_Help;
     public javax.swing.JMenu Menu_Lieux;
