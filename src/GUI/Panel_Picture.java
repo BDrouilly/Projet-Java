@@ -28,7 +28,7 @@ public class Panel_Picture extends JPanel {
     
     private static ArrayList<Poi> pois = null;
     
-    private String URL = null;
+    private String URL = "";
     
     public void setPois(ArrayList<Poi> poi)
     {
@@ -45,11 +45,12 @@ public class Panel_Picture extends JPanel {
     
         try { 
            // this.img = ImageIO.read(new File("./Saint_Pierre_De_Manneville.jpg"));
-        if (URL != null) {
-            System.out.print("ça marche ?");
+           // System.out.println("ça marche ?");
+        //if (URL != null) {
+            System.out.println(this.URL);
         this.img = ImageIO.read(new File(this.URL));
         g.drawImage(this.img,0,0,this);
-        }
+        //}
         
       //  else {
      //       URL = "./Saint_Pierre_De_Manneville.jpg"; this.img = ImageIO.read(new File(this.URL));}

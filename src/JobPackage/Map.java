@@ -23,6 +23,7 @@ public class Map {
         result.next();
         this.Name = result.getString("Map_Name");
         this.URL = result.getString("Map_Picture");
+        System.out.println(this.URL);
         } catch (Exception e) {
         	e.printStackTrace();
         }
