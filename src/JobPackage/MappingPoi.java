@@ -149,6 +149,16 @@ public class MappingPoi {
 	public void updatePoiText(int poiId, String label){
 		
 	}
+        
+        public void deletePoi(int poiId){
+            this.query = "DELETE FROM TB_POI WHERE POI_ID=" + poiId +";";
+            this.db.setRows(query);
+	}
+        
+        public void rapePoi(int poiId){
+            this.query = "DELETE FROM TB_POI WHERE POI_ID=" + poiId +";";
+            this.db.setRows(query);
+	}
 
 	/**
 	 * @return the query
