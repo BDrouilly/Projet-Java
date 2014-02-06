@@ -53,17 +53,34 @@ public class Window extends javax.swing.JFrame {
         this.showListOfMapsInMenuBar();
         this.Map_Panel.addMouseListener(new MouseListenerMap());
         this.Button_Add.addActionListener(new ActionListenerAddPOI());
+        this.Button_AddPOI.addActionListener(new ActionListenerAddButton());
         this.setSize(800,600);
         this.setResizable(false);
+        this.newPoiX = -1;
+        this.newPoiY = -1;
     }
     class ActionListenerAddPOI implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			
-		}
-    	
+			if ((Write_Info1.getText() != "") && (Write_Info2.getText() != "") && (Write_Info3.getText() != "") &&
+					(Wrtie_Address.getText() != "") && (Write_Nom.getText() != "") && (Text_Information.getText() != "")){
+				if ((newPoiX < 0) || (newPoiY < 0)) {
+					JOptionPane.showMessageDialog(Add_Panel, "Veuillez cliquer sur la carte pour définir les coordonnées du POI !");
+				}
+			} else {
+				JOptionPane.showMessageDialog(Add_Panel, "Veuillez remplir les champs requis");
+			}
+		}    	
+    }
+    class ActionListenerAddButton implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			Add_Panel.setSelectedIndex(1);	
+		}    	
     }
     class MouseListenerMap implements MouseListener{
 
@@ -72,7 +89,7 @@ public class Window extends javax.swing.JFrame {
     		// TODO Auto-generated method stub
     		newPoiX = (e.getX() * 100) / (float)Map_Panel.getWidth();
     		newPoiY = (e.getY() * 100) / (float)Map_Panel.getHeight();
-    		Text_Information.setText(newPoiX + " " + newPoiY);
+    		//Text_Information.setText(newPoiX + " " + newPoiY);
     	}
 
 		@Override
@@ -455,7 +472,7 @@ public class Window extends javax.swing.JFrame {
         jToolBar2.add(jPanel2);
 
         Add_Panel.addTab("Ajouter", jToolBar2);
-
+        
         Menu_Lieux.setText("Lieux");
         Menu_Lieux.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
