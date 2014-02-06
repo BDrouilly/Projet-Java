@@ -32,8 +32,8 @@ public class Window extends javax.swing.JFrame {
     private ArrayList<JMenuItem> MapList;
     private MappingMap mapping;
     private int i;
-    private int newPoiX;
-    private int newPoiY;
+    private float newPoiX;
+    private float newPoiY;
     
     private ArrayList<Map> Maps;
     
@@ -62,12 +62,13 @@ public class Window extends javax.swing.JFrame {
     }
     class MouseListenerMap implements MouseListener{
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			newPoiX = e.getX();
-			newPoiY = e.getY();
-		}
+    	@Override
+    	public void mouseClicked(MouseEvent e) {
+    		// TODO Auto-generated method stub
+    		newPoiX = (e.getX() * 100) / (float)Map_Panel.getWidth();
+    		newPoiY = (e.getY() * 100) / (float)Map_Panel.getHeight();
+    		Text_Information.setText(newPoiX + " " + newPoiY);
+    	}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
