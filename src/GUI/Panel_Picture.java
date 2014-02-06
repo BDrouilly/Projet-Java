@@ -30,6 +30,7 @@ public class Panel_Picture extends JPanel {
     
     private String URL = "";
     
+    
     public void setPois(ArrayList<Poi> poi)
     {
         this.pois = poi;
@@ -42,15 +43,15 @@ public class Panel_Picture extends JPanel {
     
     @Override
     public void paintComponent(Graphics g) {
-    
+        
         try { 
-
-        if (this.URL == "") {}
-        else {
+        if (this.URL != "") {        
         System.out.println(this.URL);
         this.img = ImageIO.read(new File(this.URL));
+        
         g.drawImage(this.img,0,0,this);
         }
+ 
 
         
          

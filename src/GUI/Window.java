@@ -32,15 +32,12 @@ public class Window extends javax.swing.JFrame {
     private ArrayList<JMenuItem> MapList;
     private MappingMap mapping;
     private int i;
-   // private ArrayList<String> Names;
-   // private ArrayList<Integer> IDs;
     private int newPoiX;
     private int newPoiY;
     
     private ArrayList<Map> Maps;
     
    private Graphics g = null;
-  //  private Image img;
     
     public Window() {
         initComponents();
@@ -133,10 +130,10 @@ public class Window extends javax.swing.JFrame {
             for(i = 0; i < MapList.size(); i++) {
                // System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
                 if( Maps.get(i).getName() == e.getActionCommand()) {
-                    System.out.print("TRALALALALLA");
-                    Map_Panel.setURL("");
+                    System.out.print("TRALALALALLA");      
                     Map_Panel.setURL(Maps.get(i).getURL());
-                    Map_Panel.paintComponent(g);
+                    Map_Panel.revalidate();
+                    Map_Panel.repaint();
                     break;
                 }
             }
