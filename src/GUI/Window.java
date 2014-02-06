@@ -43,13 +43,13 @@ public class Window extends javax.swing.JFrame {
         initComponents();
         Maps = new ArrayList<Map>();
         mapping = new MappingMap(); // objet MappingMap
-       // Names = new ArrayList<String>();
-       // IDs = new ArrayList<Integer>();
         MapList = new ArrayList<JMenuItem>();
         this.makeListOfMaps();
         this.showListOfMapsInMenuBar();
         this.Map_Panel.addMouseListener(new MouseListenerMap());
         this.Button_Add.addActionListener(new ActionListenerAddPOI());
+        this.setSize(800,600);
+        this.setResizable(false);
     }
     class ActionListenerAddPOI implements ActionListener {
 
@@ -101,8 +101,6 @@ public class Window extends javax.swing.JFrame {
 
             while(result.next()) {
                Maps.add(new Map(result.getInt("MAP_ID")));
-               //Names.add(result.getString("MAP_NAME"));
-               //IDs.add(result.getInt("MAP_ID"));
              }
 
          } catch (Exception e) { System.out.println("makeListOfMaps a chié"); e.printStackTrace();}
@@ -125,12 +123,9 @@ public class Window extends javax.swing.JFrame {
         java.awt.event.ActionListener action = new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent e) {
            // e.getSource() permet de connaître la source qui a déclenché l'action
-            System.out.println("ZBOOUUUUUUUB");
             System.out.println(e.getActionCommand());
             for(i = 0; i < MapList.size(); i++) {
-               // System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
                 if( Maps.get(i).getName() == e.getActionCommand()) {
-                    System.out.print("TRALALALALLA");      
                     Map_Panel.setURL(Maps.get(i).getURL());
                     Map_Panel.revalidate();
                     Map_Panel.repaint();
