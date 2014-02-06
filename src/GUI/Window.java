@@ -30,7 +30,7 @@ public class Window extends javax.swing.JFrame {
     private int i;
     private ArrayList<String> Names;
     private ArrayList<Integer> IDs;
-    
+    private ArrayList<Poi> pois;
     
     private Graphics g = null;
     private Image img;
