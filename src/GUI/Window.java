@@ -31,6 +31,7 @@ public class Window extends javax.swing.JFrame {
      */
     private ArrayList<JMenuItem> MapList;
     private MappingMap mapping;
+    private MappingPoi mappingPoi;
     private int i;
    // private ArrayList<String> Names;
    // private ArrayList<Integer> IDs;
@@ -38,6 +39,7 @@ public class Window extends javax.swing.JFrame {
     private int newPoiY;
     
     private ArrayList<Map> Maps;
+    private ArrayList<Poi> Pois;
     
    private Graphics g = null;
   //  private Image img;
@@ -46,6 +48,7 @@ public class Window extends javax.swing.JFrame {
         initComponents();
         Maps = new ArrayList<Map>();
         mapping = new MappingMap(); // objet MappingMap
+        mappingPoi = new MappingPoi();
        // Names = new ArrayList<String>();
        // IDs = new ArrayList<Integer>();
         MapList = new ArrayList<JMenuItem>();
@@ -134,6 +137,16 @@ public class Window extends javax.swing.JFrame {
                 System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
                 if(MapList.get(i).getText() == Maps.get(i).getName()) {
                    Map_Panel.setURL(Maps.get(i).getURL());
+                   //ResultSet rs = mappingPoi.getPoiByMapName(MapList.get(i).getText());
+                   ResultSet rs = mappingPoi.getPoiByMapId(Maps.get(i).getID());
+
+                   try{
+                   while(rs.next())
+                   {
+                       Pois.add(new Poi(rs.getString("name"), rs.getString("label"), rs.getString("text"), rs.getString("link"), rs.getInt("coordX"), rs.getInt("coordY"), rs.getInt("mapId")));
+                   }
+                   Map_Panel.setPois(Pois);
+                   }catch(Exception ex){}
                 }
             }
             Map_Panel.paintComponent(g);

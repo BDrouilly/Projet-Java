@@ -46,6 +46,12 @@ public class Poi {
 		this.poiMap = new MappingPoi();
 		this.poiBuilder(this.poiMap.getPoiById(id));
 	}
+        
+        
+        public Poi(String Mapname) {
+		this.poiMap = new MappingPoi();
+		this.poiBuilder(this.poiMap.getPoiByMapName(Mapname));
+	}
 	/**
 	 * instanciate a void Poi
 	 */
@@ -63,7 +69,7 @@ public class Poi {
 	 * initialize a Poi with database results from mapping object
 	 * @param result : ResultSet
 	 */
-	private void poiBuilder(ResultSet result) {
+	public void poiBuilder(ResultSet result) {
 		try {
 			result.next();
 			this.name = result.getString("POI_NAME");

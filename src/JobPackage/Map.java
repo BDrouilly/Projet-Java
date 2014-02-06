@@ -31,6 +31,12 @@ public class Map {
         
         return this.URL;
     }
+    
+    
+    public int getID(){
+        
+        return this.ID;
+    }
 
     /**
      * @return the Name

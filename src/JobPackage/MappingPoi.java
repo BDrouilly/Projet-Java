@@ -36,6 +36,12 @@ public class MappingPoi {
 		this.query = "SELECT * FROM TB_POI WHERE MAP_ID =" + mapId;
 		return db.getRows(this.query);
 	}
+        
+        public ResultSet getPoiByMapName(String mapName){
+		this.query = "SELECT * FROM TB_POI WHERE MAP_ID =" + mapName;
+		return db.getRows(this.query);
+	}
+        
 	/**
 	 * return rows for given coordinates
 	 * @param x : int
