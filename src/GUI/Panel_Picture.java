@@ -28,6 +28,7 @@ public class Panel_Picture extends JPanel {
     
     private static ArrayList<Poi> pois = null;
     
+    private String URL;
     
     public void setPois(ArrayList<Poi> poi)
     {
@@ -58,4 +59,18 @@ public class Panel_Picture extends JPanel {
         } catch (IOException e) {e.printStackTrace();}
   
 }
+
+    /**
+     * @return the URL
+     */
+    public String getURL() {
+        return URL;
+    }
+
+    /**
+     * @param URL the URL to set
+     */
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
 }

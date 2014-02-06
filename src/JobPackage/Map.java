@@ -31,5 +31,12 @@ public class Map {
         
         return this.URL;
     }
+
+    /**
+     * @return the Name
+     */
+    public String getName() {
+        return Name;
+    }
             
 }

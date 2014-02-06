@@ -32,20 +32,22 @@ public class Window extends javax.swing.JFrame {
     private ArrayList<JMenuItem> MapList;
     private MappingMap mapping;
     private int i;
-    private ArrayList<String> Names;
-    private ArrayList<Integer> IDs;
+   // private ArrayList<String> Names;
+   // private ArrayList<Integer> IDs;
     private int newPoiX;
     private int newPoiY;
+    
+    private ArrayList<Map> Maps;
     
     private Graphics g = null;
     private Image img;
     
     public Window() {
         initComponents();
-        
+        Maps = new ArrayList<Map>();
         mapping = new MappingMap(); // objet MappingMap
-        Names = new ArrayList<String>();
-        IDs = new ArrayList<Integer>();
+       // Names = new ArrayList<String>();
+       // IDs = new ArrayList<Integer>();
         MapList = new ArrayList<JMenuItem>();
         this.makeListOfMaps();
         this.showListOfMapsInMenuBar();
@@ -101,9 +103,9 @@ public class Window extends javax.swing.JFrame {
         try {
 
             while(result.next()) {
-
-               Names.add(result.getString("MAP_NAME"));
-               IDs.add(result.getInt("MAP_ID"));
+               Maps.add(new Map(result.getInt("MAP_ID")));
+               //Names.add(result.getString("MAP_NAME"));
+               //IDs.add(result.getInt("MAP_ID"));
              }
 
          } catch (Exception e) { System.out.println("makeListOfMaps a chié"); e.printStackTrace();}
@@ -113,16 +115,24 @@ public class Window extends javax.swing.JFrame {
          
 
         try {
-        for(i = 0; i < IDs.size(); i++) {
-            MapList.add(new JMenuItem(Names.get(i)));
+        for(i = 0; i < Maps.size(); i++) {
+            MapList.add(new JMenuItem(Maps.get(i).getName()));
             Menu_Lieux.add(MapList.get(i));
+            MapList.get(i).addActionListener(action);
         }
         } catch(Exception e) {e.printStackTrace();}
         
         
     }
     
-   
+        java.awt.event.ActionListener action = new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent e) {
+           // e.getSource() permet de connaître la source qui a déclenché l'action
+            System.out.print("ZBOOUUUUUUUB");
+        }
+     };
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
