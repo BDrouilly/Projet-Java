@@ -264,6 +264,7 @@ public class Window extends javax.swing.JFrame {
                 .addGap(77, 77, 77))
         );
 
+        jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
         Text_Information.setColumns(20);
@@ -285,7 +286,7 @@ public class Window extends javax.swing.JFrame {
         Consult_PanelLayout.setHorizontalGroup(
             Consult_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Consult_PanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Consult_PanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -321,6 +322,7 @@ public class Window extends javax.swing.JFrame {
 
         Add_Panel.addTab("Consulter", jToolBar1);
 
+        jToolBar2.setFloatable(false);
         jToolBar2.setRollover(true);
 
         jLabel1.setText("Nom");
@@ -368,7 +370,7 @@ public class Window extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(86, 86, 86)
                 .addComponent(Button_Add)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(125, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
