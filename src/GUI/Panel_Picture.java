@@ -46,6 +46,7 @@ public class Panel_Picture extends JPanel {
         try { 
            // this.img = ImageIO.read(new File("./Saint_Pierre_De_Manneville.jpg"));
         if (URL != null) {
+            System.out.print("ça marche ?");
         this.img = ImageIO.read(new File(this.URL));
         g.drawImage(this.img,0,0,this);
         }

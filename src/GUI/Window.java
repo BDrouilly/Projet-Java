@@ -128,15 +128,16 @@ public class Window extends javax.swing.JFrame {
         java.awt.event.ActionListener action = new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent e) {
            // e.getSource() permet de connaître la source qui a déclenché l'action
-            System.out.print("ZBOOUUUUUUUB");
-            /*
+            System.out.println("ZBOOUUUUUUUB");
+            
             for(i = 0; i < MapList.size(); i++) {
-                if(MapList.get(i).toString() == Maps.get(i).getName()) {
-
-              //      Map_Panel.setURL(Maps.get(i).getURL());
+                System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
+                if(MapList.get(i).getText() == Maps.get(i).getName()) {
+                   Map_Panel.setURL(Maps.get(i).getURL());
                 }
-            }*/
-            //Map_Panel.paintComponent(g);
+            }
+            Map_Panel.paintComponent(g);
+            
         }
      };
     
@@ -319,7 +320,7 @@ public class Window extends javax.swing.JFrame {
         Consult_PanelLayout.setHorizontalGroup(
             Consult_PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Consult_PanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Consult_PanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -443,6 +444,11 @@ public class Window extends javax.swing.JFrame {
         Add_Panel.addTab("Ajouter", jToolBar2);
 
         Menu_Lieux.setText("Lieux");
+        Menu_Lieux.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Menu_LieuxActionPerformed(evt);
+            }
+        });
         MenuBar.add(Menu_Lieux);
 
         Menu_POI.setText("POI");
@@ -512,7 +518,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel Info_2;
     private javax.swing.JLabel Info_3;
     private javax.swing.JLabel Info_4;
-    private Panel_Picture Map_Panel;
+    private javax.swing.JPanel Map_Panel;
     private javax.swing.JMenuBar MenuBar;
     public javax.swing.JMenu Menu_Help;
     public javax.swing.JMenu Menu_Lieux;
