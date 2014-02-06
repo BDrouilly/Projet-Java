@@ -6,10 +6,14 @@ package GUI;
 import JobPackage.*;
 import java.sql.*;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.util.ArrayList;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -30,7 +34,8 @@ public class Window extends javax.swing.JFrame {
     private int i;
     private ArrayList<String> Names;
     private ArrayList<Integer> IDs;
-    private ArrayList<Poi> pois;
+    private int newPoiX;
+    private int newPoiY;
     
     private Graphics g = null;
     private Image img;
@@ -45,14 +50,24 @@ public class Window extends javax.swing.JFrame {
         this.makeListOfMaps();
         this.showListOfMapsInMenuBar();
         this.Map_Panel.addMouseListener(new MouseListenerMap());
+        this.Button_Add.addActionListener(new ActionListenerAddPOI());
     }
-    
+    class ActionListenerAddPOI implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+    	
+    }
     class MouseListenerMap implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			Text_Information.setText(e.getX() + " | " + e.getY());
+			newPoiX = e.getX();
+			newPoiY = e.getY();
 		}
 
 		@Override
@@ -479,7 +494,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JLabel Info_2;
     private javax.swing.JLabel Info_3;
     private javax.swing.JLabel Info_4;
-    private javax.swing.JPanel Map_Panel;
+    private Panel_Picture Map_Panel;
     private javax.swing.JMenuBar MenuBar;
     public javax.swing.JMenu Menu_Help;
     public javax.swing.JMenu Menu_Lieux;
