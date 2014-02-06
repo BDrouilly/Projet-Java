@@ -135,8 +135,9 @@ public class MappingPoi {
 		this.query = "";
 	}
 	public void updateFullPoi(String name, int x, int y, String label, String text, int id){
-		
-	}
+		this.query = "UPDATE TB_POI SET name=" + name +",x="+ x +"y="+ y + ",label=" + label +  ",text=" + text + " WHERE POI_ID=" + id + ";";
+                this.db.setRows(query);
+        }
 	public void updatePoiName(int poiId, String name){
 		
 	}
