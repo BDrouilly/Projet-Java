@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -42,6 +44,41 @@ public class Window extends javax.swing.JFrame {
         MapList = new ArrayList<JMenuItem>();
         this.makeListOfMaps();
         this.showListOfMapsInMenuBar();
+        this.Map_Panel.addMouseListener(new MouseListenerMap());
+    }
+    
+    class MouseListenerMap implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			Text_Information.setText(e.getX() + " | " + e.getY());
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+    	
     }
     
     public void makeListOfMaps() { // RECUPERE LES INFOS SUR LES MAPS ET REMPLIE LES TABLEAUX
