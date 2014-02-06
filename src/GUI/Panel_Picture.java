@@ -28,7 +28,7 @@ public class Panel_Picture extends JPanel {
     
     private static ArrayList<Poi> pois = null;
     
-    private String URL;
+    private String URL = null;
     
     public void setPois(ArrayList<Poi> poi)
     {
@@ -43,11 +43,20 @@ public class Panel_Picture extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
     
-        try {
-        this.img = ImageIO.read(new File("./Saint_Pierre_De_Manneville.jpg"));
-        this.imgPOI = ImageIO.read(new File("./addmark.PNG")); 
+        try { 
+           // this.img = ImageIO.read(new File("./Saint_Pierre_De_Manneville.jpg"));
+        if (URL != null) {
+            System.out.print("ça marche ?");
+        this.img = ImageIO.read(new File(this.URL));
         g.drawImage(this.img,0,0,this);
+        }
         
+      //  else {
+     //       URL = "./Saint_Pierre_De_Manneville.jpg"; this.img = ImageIO.read(new File(this.URL));}
+       // this.imgPOI = ImageIO.read(new File("./addmark.PNG")); 
+        
+        
+            
         if(pois != null)
         {
             for (Poi poi : pois)

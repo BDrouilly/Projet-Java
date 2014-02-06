@@ -38,5 +38,12 @@ public class Map {
     public String getName() {
         return Name;
     }
+
+    /**
+     * @param URL the URL to set
+     */
+    public void setURL(String URL) {
+        this.URL = URL;
+    }
             
 }

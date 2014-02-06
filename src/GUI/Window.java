@@ -39,8 +39,8 @@ public class Window extends javax.swing.JFrame {
     
     private ArrayList<Map> Maps;
     
-    private Graphics g = null;
-    private Image img;
+   private Graphics g = null;
+  //  private Image img;
     
     public Window() {
         initComponents();
@@ -128,7 +128,16 @@ public class Window extends javax.swing.JFrame {
         java.awt.event.ActionListener action = new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent e) {
            // e.getSource() permet de connaître la source qui a déclenché l'action
-            System.out.print("ZBOOUUUUUUUB");
+            System.out.println("ZBOOUUUUUUUB");
+            
+            for(i = 0; i < MapList.size(); i++) {
+                System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
+                if(MapList.get(i).getText() == Maps.get(i).getName()) {
+                   Map_Panel.setURL(Maps.get(i).getURL());
+                }
+            }
+            Map_Panel.paintComponent(g);
+            
         }
      };
     
