@@ -20,10 +20,11 @@ public class Map {
         mapping = new MappingMap();
         ResultSet result = mapping.getMapById(this.ID);
         try { // RECUPERE LE NOM ET L'URL
-        result.next();
+        while(result.next()) {
         this.Name = result.getString("Map_Name");
         this.URL = result.getString("Map_Picture");
         System.out.println(this.URL);
+        }
         } catch (Exception e) {
         	e.printStackTrace();
         }

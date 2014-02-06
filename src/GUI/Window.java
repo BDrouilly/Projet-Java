@@ -33,16 +33,13 @@ public class Window extends javax.swing.JFrame {
     private MappingMap mapping;
     private MappingPoi mappingPoi;
     private int i;
-   // private ArrayList<String> Names;
-   // private ArrayList<Integer> IDs;
-    private int newPoiX;
-    private int newPoiY;
+    private float newPoiX;
+    private float newPoiY;
     
     private ArrayList<Map> Maps;
     private ArrayList<Poi> Pois;
     
    private Graphics g = null;
-  //  private Image img;
     
     public Window() {
         initComponents();
@@ -56,6 +53,8 @@ public class Window extends javax.swing.JFrame {
         this.showListOfMapsInMenuBar();
         this.Map_Panel.addMouseListener(new MouseListenerMap());
         this.Button_Add.addActionListener(new ActionListenerAddPOI());
+        this.setSize(800,600);
+        this.setResizable(false);
     }
     class ActionListenerAddPOI implements ActionListener {
 
@@ -68,12 +67,13 @@ public class Window extends javax.swing.JFrame {
     }
     class MouseListenerMap implements MouseListener{
 
-		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			newPoiX = e.getX();
-			newPoiY = e.getY();
-		}
+    	@Override
+    	public void mouseClicked(MouseEvent e) {
+    		// TODO Auto-generated method stub
+    		newPoiX = (e.getX() * 100) / (float)Map_Panel.getWidth();
+    		newPoiY = (e.getY() * 100) / (float)Map_Panel.getHeight();
+    		Text_Information.setText(newPoiX + " " + newPoiY);
+    	}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
@@ -107,8 +107,6 @@ public class Window extends javax.swing.JFrame {
 
             while(result.next()) {
                Maps.add(new Map(result.getInt("MAP_ID")));
-               //Names.add(result.getString("MAP_NAME"));
-               //IDs.add(result.getInt("MAP_ID"));
              }
 
          } catch (Exception e) { System.out.println("makeListOfMaps a chié"); e.printStackTrace();}
@@ -131,8 +129,7 @@ public class Window extends javax.swing.JFrame {
         java.awt.event.ActionListener action = new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent e) {
            // e.getSource() permet de connaître la source qui a déclenché l'action
-            System.out.println("ZBOOUUUUUUUB");
-            
+            System.out.println(e.getActionCommand());
             for(i = 0; i < MapList.size(); i++) {
                 System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
                 if(MapList.get(i).getText() == Maps.get(i).getName()) {
@@ -149,7 +146,7 @@ public class Window extends javax.swing.JFrame {
                    }catch(Exception ex){}
                 }
             }
-            Map_Panel.paintComponent(g);
+            ;
             
         }
      };
