@@ -129,14 +129,18 @@ public class Window extends javax.swing.JFrame {
         public void actionPerformed(java.awt.event.ActionEvent e) {
            // e.getSource() permet de connaître la source qui a déclenché l'action
             System.out.println("ZBOOUUUUUUUB");
-            
+            System.out.println(e.getActionCommand());
             for(i = 0; i < MapList.size(); i++) {
-                System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
-                if(MapList.get(i).getText() == Maps.get(i).getName()) {
-                   Map_Panel.setURL(Maps.get(i).getURL());
+               // System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
+                if( Maps.get(i).getName() == e.getActionCommand()) {
+                    System.out.print("TRALALALALLA");
+                    Map_Panel.setURL("");
+                    Map_Panel.setURL(Maps.get(i).getURL());
+                    Map_Panel.paintComponent(g);
+                    break;
                 }
             }
-            Map_Panel.paintComponent(g);
+            ;
             
         }
      };

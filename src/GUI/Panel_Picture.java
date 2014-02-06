@@ -44,21 +44,17 @@ public class Panel_Picture extends JPanel {
     public void paintComponent(Graphics g) {
     
         try { 
-           // this.img = ImageIO.read(new File("./Saint_Pierre_De_Manneville.jpg"));
-           // System.out.println("ça marche ?");
-        //if (URL != null) {
-            System.out.println(this.URL);
+
+        if (this.URL == "") {}
+        else {
+        System.out.println(this.URL);
         this.img = ImageIO.read(new File(this.URL));
         g.drawImage(this.img,0,0,this);
-        //}
+        }
+
         
-      //  else {
-     //       URL = "./Saint_Pierre_De_Manneville.jpg"; this.img = ImageIO.read(new File(this.URL));}
-       // this.imgPOI = ImageIO.read(new File("./addmark.PNG")); 
-        
-        
-            
-        if(pois != null)
+         
+       if(pois != null)
         {
             for (Poi poi : pois)
             {
