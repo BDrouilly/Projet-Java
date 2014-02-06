@@ -23,10 +23,10 @@ import javax.imageio.ImageIO;
  */
 public class Panel_Picture extends JPanel {
     
-    private Image img = null;
-    private Image imgPOI = null;
+    private static Image img = null;
+    private static Image imgPOI = null;
     
-    private ArrayList<Poi> pois = null;
+    private static ArrayList<Poi> pois = null;
     
     
     public void setPois(ArrayList<Poi> poi)
