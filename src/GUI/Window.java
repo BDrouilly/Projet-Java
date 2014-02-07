@@ -183,6 +183,7 @@ public class Window extends javax.swing.JFrame {
                     System.out.print("TRALALALALLA");      
                     Map_Panel.setURL(Maps.get(i).getURL());
                     ResultSet rs = mappingPoi.getPoiByMapId(Maps.get(i).getID());
+                    Pois = null;
                    if(rs != null){
                    try{
                    while(rs.next())

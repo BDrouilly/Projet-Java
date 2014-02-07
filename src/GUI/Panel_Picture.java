@@ -48,11 +48,12 @@ public class Panel_Picture extends JPanel {
         
         try { 
         if (this.URL != "") {        
-        System.out.println(this.URL);
-        this.img = ImageIO.read(new File(this.URL));
-        this.imgPOI = ImageIO.read(new File("./mark.png"));
-        
-        g.drawImage(this.img,0,0,this);
+            System.out.println(this.URL);
+            this.img = ImageIO.read(new File(this.URL));
+
+            this.imgPOI = ImageIO.read(new File("./mark.png"));
+
+            g.drawImage(this.img,0,0,this);
         }
  
 
@@ -64,10 +65,10 @@ public class Panel_Picture extends JPanel {
             {
                 x = ((poi.getCoordX())*this.getWidth())/100;
                 y = ((poi.getCoordY())*this.getHeight())/100;
-                System.out.println("Affichage de coord... " + (float)this.getHeight()+ poi.getCoordX();
+                //System.out.println("Affichage de coord... " + (float)this.getHeight()+ poi.getCoordX();
 
                 
-                g.drawImage(this.imgPOI, x, y, 30, 30, this);
+                g.drawImage(this.imgPOI, x-30, y-30, 30, 30, this);
                 System.out.println("Affichage de POI... x="+x+"///y="+y+"////name="+poi.getName());
             }
         }
