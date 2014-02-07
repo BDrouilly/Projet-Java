@@ -179,11 +179,11 @@ public class Window extends javax.swing.JFrame {
              for(i = 0; i < MapList.size(); i++) {
                // System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
                 if( Maps.get(i).getName() == e.getActionCommand()) {
-                	currMapId = Maps.get(i).getID();
+                    Pois.clear();
+                    currMapId = Maps.get(i).getID();
                     System.out.print("TRALALALALLA");      
                     Map_Panel.setURL(Maps.get(i).getURL());
                     ResultSet rs = mappingPoi.getPoiByMapId(Maps.get(i).getID());
-                    Pois = null;
                    if(rs != null){
                    try{
                    while(rs.next())
