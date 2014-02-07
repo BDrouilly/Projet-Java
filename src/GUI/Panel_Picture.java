@@ -30,6 +30,8 @@ public class Panel_Picture extends JPanel {
     
     private String URL = "";
     
+    private int x, y;
+    
     
     public void setPois(ArrayList<Poi> poi)
     {
@@ -60,9 +62,10 @@ public class Panel_Picture extends JPanel {
         {
             for (Poi poi : pois)
             {
-                int x = (int)((poi.getCoordX()/ 100)*this.getWidth());
-                int y = (int)((poi.getCoordY()/ 100)*this.getHeight());
-                 g.drawImage(this.imgPOI, x, y,this);
+                x = (int)((poi.getCoordX()/ 100)*this.getWidth());
+                y = (int)((poi.getCoordY()/ 100)*this.getHeight());
+                g.drawImage(this.imgPOI, x, y, 30, 30, this);
+                System.out.println("Affichage de POI... x="+x+"///y="+y+"////name="+poi.getName());
             }
         }
 
