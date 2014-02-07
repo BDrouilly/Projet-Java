@@ -613,3 +613,25 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
 }
+
+
+
+/*   CODE A AJOUTER SI VOUS REGLEZ LE PROBLEME DE CES PUTAINS D'EVENT DU DESIGNER DE MERDE
+
+ private void Button_PrevMouseClicked(java.awt.event.MouseEvent evt) {    //poi précedent                                      
+        if(Pois.get(Pois.indexOf(selectedPoi)-1) != null)
+            selectedPoi = Pois.get(Pois.indexOf(selectedPoi)-1);
+    }                                        
+
+    private void Button_NextMouseClicked(java.awt.event.MouseEvent evt) { //poi suivant    
+        if(Pois.get(Pois.indexOf(selectedPoi)+1) != null)
+            selectedPoi = Pois.get(Pois.indexOf(selectedPoi)+1);
+    }   
+
+
+private void Button_RechercheMouseClicked(java.awt.event.MouseEvent evt) {  //recherche POI
+        if( SearchBar.getText() != "" && currMapId > 0)
+            mappingPoi.SearchPOI(SearchBar.getText(), currMapId);
+    }             
+
+*/
