@@ -138,10 +138,13 @@ public class Window extends javax.swing.JFrame {
     
     public void ShowInfoPoi()
     {
+        if (selectedPoi != null)
+        {
         Info_1.setText(selectedPoi.getName());
         Info_2.setText(selectedPoi.getLabel());
         Info_3.setText(selectedPoi.getText());
         Info_4.setText(selectedPoi.getLink());
+        }
     }
     
     public void makeListOfMaps() { // RECUPERE LES INFOS SUR LES MAPS ET REMPLIE LES TABLEAUX
@@ -180,7 +183,7 @@ public class Window extends javax.swing.JFrame {
                     System.out.print("TRALALALALLA");      
                     Map_Panel.setURL(Maps.get(i).getURL());
                     ResultSet rs = mappingPoi.getPoiByMapId(Maps.get(i).getID());
-
+                   if(rs != null){
                    try{
                    while(rs.next())
                    {
@@ -189,7 +192,7 @@ public class Window extends javax.swing.JFrame {
                    Map_Panel.setPois(Pois);
                    }catch(Exception ex){ex.printStackTrace();}
                     selectedPoi = Pois.get(0);
-                    ShowInfoPoi();
+                    ShowInfoPoi();}
                     Map_Panel.revalidate();
                     Map_Panel.repaint();
                     break;
