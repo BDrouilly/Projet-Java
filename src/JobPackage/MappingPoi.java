@@ -117,7 +117,7 @@ public class MappingPoi {
 	 * @param x : int
 	 * @param y : int
 	 */
-	public void setNew(String name, int x, int y, int mapId){
+	public void setNew(String name, float x, float y, int mapId){
 		this.query ="INSERT INTO TB_POI(MAP_ID, POI_DATE, POI_NAME, POI_X, POI_Y) " +
 				"VALUES(" + mapId + ", '" + new Date(System.currentTimeMillis()).toString() + "', '" + name + "', " + x + ", " + y + ")";
 		this.db.setRows(query);
@@ -132,9 +132,9 @@ public class MappingPoi {
 	 * @param link : String
 	 * @param mapId : int
 	 */
-	public void setNew(String name, int x, int y, String label, String text, String link, int mapId){
+	public void setNew(String name, float x, float y, String label, String text, String link, int mapId){
 		this.query ="INSERT INTO TB_POI(MAP_ID, POI_DATE, POI_NAME, POI_X, POI_Y, POI_LABEL, POI_DESCRIPTION, POI_LINK) " +
-				"VALUES(" + mapId + ", '" + new Date(System.currentTimeMillis()).toString() + "', '" + name + "', " + x + ", " + y + ", '" + label + "', '" + text + "', '" + link + ")";
+				"VALUES(" + mapId + ", '" + new Date(System.currentTimeMillis()).toString() + "', '" + name + "', " + x + ", " + y + ", '" + label + "', '" + text + "', '" + link + "')";
 		this.db.setRows(query);
 	}
 	public void setNewPoiPicture(int poiId, String pictureUrl){

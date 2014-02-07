@@ -35,6 +35,7 @@ public class Window extends javax.swing.JFrame {
     private int i;
     private float newPoiX;
     private float newPoiY;
+    private int currMapId;
     
     private ArrayList<Map> Maps;
     private ArrayList<Poi> Pois;
@@ -58,16 +59,19 @@ public class Window extends javax.swing.JFrame {
         this.setResizable(false);
         this.newPoiX = -1;
         this.newPoiY = -1;
+        
     }
     class ActionListenerAddPOI implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			if ((Write_Info1.getText() != "") && (Write_Info2.getText() != "") && (Write_Info3.getText() != "") &&
-					(Wrtie_Address.getText() != "") && (Write_Nom.getText() != "") && (Text_Information.getText() != "")){
+			if ((Write_Info1.getText() != "") || (Write_Info2.getText() != "") || (Write_Info3.getText() != "") &&
+					(Wrtie_Address.getText() != "") || (Write_Nom.getText() != "") || ((Text_Information.getText() != "")) && (Text_Information.getText() != "Description")){
 				if ((newPoiX < 0) || (newPoiY < 0)) {
 					JOptionPane.showMessageDialog(Add_Panel, "Veuillez cliquer sur la carte pour définir les coordonnées du POI !");
+				} else {
+					mappingPoi.setNew(Write_Nom.getText(), newPoiX, newPoiY, Write_Info1.getText(), Text_Information.getText(), Wrtie_Address.getText(), currMapId);
 				}
 			} else {
 				JOptionPane.showMessageDialog(Add_Panel, "Veuillez remplir les champs requis");
@@ -79,6 +83,8 @@ public class Window extends javax.swing.JFrame {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
+			newPoiX = -1;
+			newPoiY = -1;
 			Add_Panel.setSelectedIndex(1);	
 		}    	
     }
@@ -150,6 +156,7 @@ public class Window extends javax.swing.JFrame {
              for(i = 0; i < MapList.size(); i++) {
                // System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
                 if( Maps.get(i).getName() == e.getActionCommand()) {
+                	currMapId = Maps.get(i).getID();
                     System.out.print("TRALALALALLA");      
                     Map_Panel.setURL(Maps.get(i).getURL());
                     ResultSet rs = mappingPoi.getPoiByMapId(Maps.get(i).getID());
