@@ -36,6 +36,7 @@ public class Window extends javax.swing.JFrame {
     private float newPoiX;
     private float newPoiY;
     private int currMapId;
+    private Poi selectedPoi;
     
     private ArrayList<Map> Maps;
     private ArrayList<Poi> Pois;
@@ -69,7 +70,7 @@ public class Window extends javax.swing.JFrame {
 			if ((Write_Info1.getText() != "") || (Write_Info2.getText() != "") || (Write_Info3.getText() != "") &&
 					(Wrtie_Address.getText() != "") || (Write_Nom.getText() != "") || ((Text_Information.getText() != "")) && (Text_Information.getText() != "Description")){
 				if ((newPoiX < 0) || (newPoiY < 0)) {
-					JOptionPane.showMessageDialog(Add_Panel, "Veuillez cliquer sur la carte pour définir les coordonnées du POI !");
+					JOptionPane.showMessageDialog(Add_Panel, "Veuillez cliquer sur la carte pour dï¿½finir les coordonnï¿½es du POI !");
 				} else {
 					mappingPoi.setNew(Write_Nom.getText(), newPoiX, newPoiY, Write_Info1.getText(), Text_Information.getText(), Wrtie_Address.getText(), currMapId);
 				}
@@ -122,6 +123,14 @@ public class Window extends javax.swing.JFrame {
 			
 		}
     	
+    }
+    
+    public void ShowInfoPoi()
+    {
+        Info_1.setText(selectedPoi.getName());
+        Info_2.setText(selectedPoi.getLabel());
+        Info_3.setText(selectedPoi.getText());
+        Info_4.setText(selectedPoi.getLink());
     }
     
     public void makeListOfMaps() { // RECUPERE LES INFOS SUR LES MAPS ET REMPLIE LES TABLEAUX
