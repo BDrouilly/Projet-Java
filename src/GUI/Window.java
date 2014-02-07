@@ -46,6 +46,7 @@ public class Window extends javax.swing.JFrame {
     public Window() {
         initComponents();
         Maps = new ArrayList<Map>();
+        Pois = new ArrayList<Poi>();
         mapping = new MappingMap(); // objet MappingMap
         mappingPoi = new MappingPoi();
        // Names = new ArrayList<String>();
@@ -173,10 +174,12 @@ public class Window extends javax.swing.JFrame {
                    try{
                    while(rs.next())
                    {
-                       Pois.add(new Poi(rs.getString("name"), rs.getString("label"), rs.getString("text"), rs.getString("link"), rs.getInt("coordX"), rs.getInt("coordY"), rs.getInt("mapId")));
+                       Pois.add(new Poi(rs.getString("POI_NAME"), rs.getString("POI_LABEL"), rs.getString("POI_DESCRIPTION"), rs.getString("POI_LINK"), rs.getInt("POI_X"), rs.getInt("POI_Y"), rs.getInt("MAP_ID")));
                    }
                    Map_Panel.setPois(Pois);
-                   }catch(Exception ex){}
+                   }catch(Exception ex){ex.printStackTrace();}
+                    selectedPoi = Pois.get(0);
+                    ShowInfoPoi();
                     Map_Panel.revalidate();
                     Map_Panel.repaint();
                     break;
