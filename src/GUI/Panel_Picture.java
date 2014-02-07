@@ -48,6 +48,7 @@ public class Panel_Picture extends JPanel {
         if (this.URL != "") {        
         System.out.println(this.URL);
         this.img = ImageIO.read(new File(this.URL));
+        this.imgPOI = ImageIO.read(new File("./mark.png"));
         
         g.drawImage(this.img,0,0,this);
         }
@@ -59,7 +60,9 @@ public class Panel_Picture extends JPanel {
         {
             for (Poi poi : pois)
             {
-                g.drawImage(this.imgPOI, poi.getCoordX(), poi.getCoordY(),this);
+                int x = (int)((poi.getCoordX()/ 100)*this.getWidth());
+                int y = (int)((poi.getCoordY()/ 100)*this.getHeight());
+                 g.drawImage(this.imgPOI, x, y,this);
             }
         }
 
