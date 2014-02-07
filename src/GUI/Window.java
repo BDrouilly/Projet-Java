@@ -98,6 +98,16 @@ public class Window extends javax.swing.JFrame {
     		newPoiX = (e.getX() * 100) / (float)Map_Panel.getWidth();
     		newPoiY = (e.getY() * 100) / (float)Map_Panel.getHeight();
     		//Text_Information.setText(newPoiX + " " + newPoiY);
+                
+                for( Poi poi : Pois)
+                {
+                    if (Math.abs(poi.getCoordX()-newPoiX) < 5 )
+                    {
+                        selectedPoi = poi;
+                        ShowInfoPoi();
+                    }
+                }
+                
     	}
 
 		@Override
