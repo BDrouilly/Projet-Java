@@ -62,8 +62,11 @@ public class Panel_Picture extends JPanel {
         {
             for (Poi poi : pois)
             {
-                x = (int)((poi.getCoordX()/ 100)*this.getWidth());
-                y = (int)((poi.getCoordY()/ 100)*this.getHeight());
+                x = ((poi.getCoordX())*this.getWidth())/100;
+                y = ((poi.getCoordY())*this.getHeight())/100;
+                System.out.println("Affichage de coord... " + (float)this.getHeight()+ poi.getCoordX();
+
+                
                 g.drawImage(this.imgPOI, x, y, 30, 30, this);
                 System.out.println("Affichage de POI... x="+x+"///y="+y+"////name="+poi.getName());
             }
