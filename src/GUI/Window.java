@@ -187,6 +187,7 @@ public class Window extends javax.swing.JFrame {
         public void actionPerformed(java.awt.event.ActionEvent e) {
            // e.getSource() permet de connaître la source qui a déclenché l'action
             System.out.println(e.getActionCommand());
+            int poiGetted = 0;
              for(i = 0; i < MapList.size(); i++) {
                // System.out.println(MapList.get(i).getText() + "//" + Maps.get(i).getName());
                 if( Maps.get(i).getName() == e.getActionCommand()) {
@@ -195,21 +196,26 @@ public class Window extends javax.swing.JFrame {
                     System.out.print("TRALALALALLA");      
                     Map_Panel.setURL(Maps.get(i).getURL());
                     ResultSet rs = mappingPoi.getPoiByMapId(Maps.get(i).getID());
-                   if(rs != null){
-                   try{
-                   while(rs.next())
-                   {
-                       Pois.add(new Poi(rs.getString("POI_NAME"), rs.getString("POI_LABEL"), rs.getString("POI_DESCRIPTION"), rs.getString("POI_LINK"), rs.getInt("POI_X"), rs.getInt("POI_Y"), rs.getInt("MAP_ID")));
-                   }
-                   Map_Panel.setPois(Pois);
-                   }catch(Exception ex){ex.printStackTrace();}
-                    selectedPoi = Pois.get(0);
-                    ShowInfoPoi();}
-                    Map_Panel.revalidate();
-                    Map_Panel.repaint();
-                    break;
-                
-                }
+                    if(rs != null){
+	                   try{
+		                   while(rs.next())
+		                   {
+		                	   poiGetted++;
+		                       Pois.add(new Poi(rs.getString("POI_NAME"), rs.getString("POI_LABEL"), rs.getString("POI_DESCRIPTION"), rs.getString("POI_LINK"), rs.getInt("POI_X"), rs.getInt("POI_Y"), rs.getInt("MAP_ID")));
+		                   }
+		                   Map_Panel.setPois(Pois);
+		                   } catch(Exception ex) {
+		                	   	ex.printStackTrace();
+		                   }
+	                   if(poiGetted > 0) {
+		                    selectedPoi = Pois.get(0);
+		                    ShowInfoPoi();
+	                   }
+	           }
+		                    Map_Panel.revalidate();
+		                    Map_Panel.repaint();
+		                    break;                
+	            }
             }
             
         }
