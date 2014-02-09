@@ -11,6 +11,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.util.ArrayList;
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -43,7 +44,7 @@ public class Window extends javax.swing.JFrame {
     private ArrayList<Map> Maps;
     private ArrayList<Poi> Pois;
     
-   private Graphics g = null;
+   //private Graphics g = null;
     
     public Window() {
         initComponents();
@@ -102,6 +103,7 @@ public class Window extends javax.swing.JFrame {
 			if(JOptionPane.showConfirmDialog(Map_Panel, "Supprimer ce POI ? (Définitif)") == 0){
 				mappingPoi.deletePoi(selectedPoi.getId());
 				Pois.remove(selectedPoi);
+				showVoidPoiInfo();
 				Map_Panel.setPois(Pois);
 				Map_Panel.revalidate();
 				Map_Panel.repaint();
@@ -304,7 +306,11 @@ public class Window extends javax.swing.JFrame {
         Menu_Lieux = new javax.swing.JMenu();
         Menu_POI = new javax.swing.JMenu();
         Menu_Help = new javax.swing.JMenu();
-
+        newRoutePanel = new javax.swing.JPanel();
+        
+        newRoutePanel.setLayout(new java.awt.BorderLayout());
+        newRoutePanel.add(new javax.swing.JButton("Enregistrer"), BorderLayout.SOUTH);
+        
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
@@ -553,6 +559,8 @@ public class Window extends javax.swing.JFrame {
         jToolBar2.add(jPanel2);
 
         Add_Panel.addTab("Ajouter", jToolBar2);
+        Add_Panel.addTab("Itinéraires", newRoutePanel);
+
         
         Menu_Lieux.setText("Lieux");
         Menu_Lieux.addActionListener(new java.awt.event.ActionListener() {
@@ -625,6 +633,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton Button_Prev;
     private javax.swing.JComboBox Combo_Interface;
     private javax.swing.JPanel Consult_Panel;
+    private javax.swing.JPanel newRoutePanel;
     private javax.swing.JLabel Info_1;
     private javax.swing.JLabel Info_2;
     private javax.swing.JLabel Info_3;
