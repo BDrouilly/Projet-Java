@@ -57,6 +57,7 @@ public class Window extends javax.swing.JFrame {
         this.Map_Panel.addMouseListener(new MouseListenerMap());
         this.Button_Add.addActionListener(new ActionListenerAddPOI());
         this.Button_AddPOI.addActionListener(new ActionListenerAddButton());
+        this.Button_DelPOI.addActionListener(new ActionListenerDelButton());
         this.setSize(800,600);
         this.setResizable(false);
         this.newPoiX = -1;
@@ -79,6 +80,16 @@ public class Window extends javax.swing.JFrame {
 				JOptionPane.showMessageDialog(Add_Panel, "Veuillez remplir les champs requis");
 			}
 		}    	
+    }
+    class ActionListenerDelButton implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			JOptionPane.showMessageDialog(Map_Panel, selectedPoi.getId());
+			mappingPoi.deletePoi(selectedPoi.getId());
+		}
+    	
     }
     class ActionListenerAddButton implements ActionListener {
 

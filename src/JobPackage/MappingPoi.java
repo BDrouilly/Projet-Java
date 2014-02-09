@@ -144,19 +144,6 @@ public class MappingPoi {
 		this.query = "UPDATE TB_POI SET name=" + name +",x="+ x +"y="+ y + ",label=" + label +  ",text=" + text + " WHERE POI_ID=" + id + ";";
                 this.db.setRows(query);
         }
-	public void updatePoiName(int poiId, String name){
-		
-	}
-	public void updatePoiCoord(int poiId, int x, int y){
-		
-	}
-	public void updatePoiLabel(int poiId, String label){
-		
-	}
-	public void updatePoiText(int poiId, String label){
-		
-	}
-        
         public void deletePoi(int poiId){
             this.query = "DELETE FROM TB_POI WHERE POI_ID=" + poiId +";";
             this.db.setRows(query);

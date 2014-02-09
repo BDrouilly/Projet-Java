@@ -10,9 +10,10 @@ import java.sql.ResultSet;
  *
  */
 public class Poi {
+	private int id;
 	private MappingPoi poiMap;
-	private int coordX;
-	private int coordY;
+	private float coordX;
+	private float coordY;
 	private String name;
 	private String label;
 	private String text;
@@ -72,9 +73,10 @@ public class Poi {
 	public void poiBuilder(ResultSet result) {
 		try {
 			result.next();
+			this.id = result.getInt("POI_ID");
 			this.name = result.getString("POI_NAME");
-			this.coordX = result.getInt("POI_X");
-			this.coordY = result.getInt("POI_Y");
+			this.coordX = result.getFloat("POI_X");
+			this.coordY = result.getFloat("POI_Y");
 			this.label = result.getString("POI_LABEL");
 			this.text = result.getString("POI_DESCRIPTION");
 			this.link = result.getString("POI_LINK");
@@ -91,28 +93,28 @@ public class Poi {
 	/**
 	 * @return the coordX
 	 */
-	public int getCoordX() {
+	public float getCoordX() {
 		return coordX;
 	}
 
 	/**
 	 * @param coordX the coordX to set
 	 */
-	public void setCoordX(int coordX) {
+	public void setCoordX(float coordX) {
 		this.coordX = coordX;
 	}
 
 	/**
 	 * @return the coordY
 	 */
-	public int getCoordY() {
+	public float getCoordY() {
 		return coordY;
 	}
 
 	/**
 	 * @param coordY the coordY to set
 	 */
-	public void setCoordY(int coordY) {
+	public void setCoordY(float coordY) {
 		this.coordY = coordY;
 	}
 
@@ -182,5 +184,17 @@ public class Poi {
 	 */
 	public void setMapId(int mapId) {
 		this.mapId = mapId;
+	}
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 }
