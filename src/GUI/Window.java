@@ -4,12 +4,13 @@
  */
 package GUI;
 import JobPackage.*;
+
 import java.sql.*;
+
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.util.ArrayList;
-
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -18,6 +19,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -97,8 +99,14 @@ public class Window extends javax.swing.JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			JOptionPane.showMessageDialog(Map_Panel, selectedPoi.getId());
-			mappingPoi.deletePoi(selectedPoi.getId());
+			if(JOptionPane.showConfirmDialog(Map_Panel, "Supprimer ce POI ? (Définitif)") == 0){
+				mappingPoi.deletePoi(selectedPoi.getId());
+				Pois.remove(selectedPoi);
+				Map_Panel.setPois(Pois);
+				Map_Panel.revalidate();
+				Map_Panel.repaint();
+			}
+			
 		}
     	
     }
@@ -117,21 +125,7 @@ public class Window extends javax.swing.JFrame {
     	@Override
     	public void mouseClicked(MouseEvent e) {
     		// TODO Auto-generated method stub
-    		newPoiX = (e.getX() * 100) / (float)Map_Panel.getWidth();
-    		newPoiY = (e.getY() * 100) / (float)Map_Panel.getHeight();
-    		Text_Information.setText(newPoiX + " " + newPoiY);
-                
-                for( Poi poi : Pois)
-                {
-                    if ((Math.abs(poi.getCoordX()-newPoiX) < 5 ) && (Math.abs(poi.getCoordY()-newPoiY) < 7 ))
-                    {
-                    	Add_Panel.setSelectedIndex(0);
-                        selectedPoi = poi;
-                        ShowInfoPoi();
-                    } else {
-                    	Add_Panel.setSelectedIndex(1);
-                    }
-                }
+
                 
     	}
 
@@ -150,7 +144,22 @@ public class Window extends javax.swing.JFrame {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+    		newPoiX = (e.getX() * 100) / (float)Map_Panel.getWidth();
+    		newPoiY = (e.getY() * 100) / (float)Map_Panel.getHeight();                
+                for( Poi poi : Pois)
+                {
+                    if ((Math.abs(poi.getCoordX()-newPoiX) < 5 ) && (Math.abs(poi.getCoordY()-newPoiY) < 10 ))
+                    {
+                    	System.out.println("-- hop hopon va a l'oglet 0 ?" + (Math.abs(poi.getCoordX()-(int)newPoiX)) +" "+  (Math.abs(poi.getCoordY()-(int)newPoiY)));
+                        selectedPoi = poi;
+                        ShowInfoPoi();
+                    	Add_Panel.setSelectedIndex(0);
+                    	break;
+                    } else {
+                    	System.out.println("-- hop hopon va a l'oglet 1 ?" + (Math.abs(poi.getCoordX()-(int)newPoiX)) +" "+  (Math.abs(poi.getCoordY()-(int)newPoiY)));
+                    	Add_Panel.setSelectedIndex(1);
+                    }
+                }
 		}
 
 		@Override
@@ -221,7 +230,7 @@ public class Window extends javax.swing.JFrame {
 		                   while(rs.next())
 		                   {
 		                	   poiGetted++;
-		                       Pois.add(new Poi(rs.getString("POI_NAME"), rs.getString("POI_LABEL"), rs.getString("POI_DESCRIPTION"), rs.getString("POI_LINK"), rs.getInt("POI_X"), rs.getInt("POI_Y"), rs.getInt("MAP_ID")));
+		                       Pois.add(new Poi(rs.getInt("POI_ID")));
 		                   }
 		                   Map_Panel.setPois(Pois);
 		                   } catch(Exception ex) {
