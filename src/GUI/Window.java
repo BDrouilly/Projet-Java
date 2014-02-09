@@ -70,11 +70,15 @@ public class Window extends javax.swing.JFrame {
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
 			if ((Write_Info1.getText() != "") || (Write_Info2.getText() != "") || (Write_Info3.getText() != "") &&
-					(Wrtie_Address.getText() != "") || (Write_Nom.getText() != "") || ((Text_Information.getText() != "")) && (Text_Information.getText() != "Description")){
+					(Wrtie_Address.getText() != "") || (Write_Nom.getText() != "") || ((jTextArea2.getText() != "")) && (jTextArea2.getText() != "Description")){
 				if ((newPoiX < 0) || (newPoiY < 0)) {
 					JOptionPane.showMessageDialog(Add_Panel, "Veuillez cliquer sur la carte pour dï¿½finir les coordonnï¿½es du POI !");
 				} else {
-					mappingPoi.setNew(Write_Nom.getText(), newPoiX, newPoiY, Write_Info1.getText(), Text_Information.getText(), Wrtie_Address.getText(), currMapId);
+					mappingPoi.setNew(Write_Nom.getText(), newPoiX, newPoiY, Write_Info1.getText(), jTextArea2.getText(), Wrtie_Address.getText(), currMapId);
+                    Pois.add(new Poi(Write_Nom.getText(), Write_Info1.getText(), jTextArea2.getText(), Write_Info2.getText(), (int)newPoiX, (int)newPoiY, currMapId));
+					Map_Panel.setPois(Pois);
+					Map_Panel.revalidate();
+					Map_Panel.repaint();
 				}
 			} else {
 				JOptionPane.showMessageDialog(Add_Panel, "Veuillez remplir les champs requis");
@@ -112,7 +116,7 @@ public class Window extends javax.swing.JFrame {
                 
                 for( Poi poi : Pois)
                 {
-                    if (Math.abs(poi.getCoordX()-newPoiX) < 5 )
+                    if ((Math.abs(poi.getCoordX()-newPoiX) < 5 ) && (Math.abs(poi.getCoordY()-newPoiY) < 5 ))
                     {
                         selectedPoi = poi;
                         ShowInfoPoi();
@@ -157,7 +161,13 @@ public class Window extends javax.swing.JFrame {
         Info_4.setText(selectedPoi.getLink());
         }
     }
-    
+    public void showVoidPoiInfo()
+    {
+        Info_1.setText("Aucun POI sélectionné");
+        Info_2.setText("");
+        Info_3.setText("");
+        Info_4.setText("");
+    }
     public void makeListOfMaps() { // RECUPERE LES INFOS SUR LES MAPS ET REMPLIE LES TABLEAUX
         ResultSet result =  mapping.getMap();
         try {
@@ -210,6 +220,8 @@ public class Window extends javax.swing.JFrame {
 	                   if(poiGetted > 0) {
 		                    selectedPoi = Pois.get(0);
 		                    ShowInfoPoi();
+	                   } else {
+	                	   showVoidPoiInfo();
 	                   }
 	           }
 		                    Map_Panel.revalidate();
