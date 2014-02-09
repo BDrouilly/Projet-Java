@@ -79,6 +79,13 @@ public class Window extends javax.swing.JFrame {
 					Map_Panel.setPois(Pois);
 					Map_Panel.revalidate();
 					Map_Panel.repaint();
+					Write_Info1.setText("");
+					Write_Info2.setText("");
+					Write_Info3.setText("");
+					Write_Nom.setText("");
+					Wrtie_Address.setText("");
+					jTextArea2.setText("");
+					JOptionPane.showMessageDialog(Map_Panel, "POI Ajouté !");
 				}
 			} else {
 				JOptionPane.showMessageDialog(Add_Panel, "Veuillez remplir les champs requis");
@@ -112,14 +119,17 @@ public class Window extends javax.swing.JFrame {
     		// TODO Auto-generated method stub
     		newPoiX = (e.getX() * 100) / (float)Map_Panel.getWidth();
     		newPoiY = (e.getY() * 100) / (float)Map_Panel.getHeight();
-    		//Text_Information.setText(newPoiX + " " + newPoiY);
+    		Text_Information.setText(newPoiX + " " + newPoiY);
                 
                 for( Poi poi : Pois)
                 {
-                    if ((Math.abs(poi.getCoordX()-newPoiX) < 5 ) && (Math.abs(poi.getCoordY()-newPoiY) < 5 ))
+                    if ((Math.abs(poi.getCoordX()-newPoiX) < 5 ) && (Math.abs(poi.getCoordY()-newPoiY) < 7 ))
                     {
+                    	Add_Panel.setSelectedIndex(0);
                         selectedPoi = poi;
                         ShowInfoPoi();
+                    } else {
+                    	Add_Panel.setSelectedIndex(1);
                     }
                 }
                 
