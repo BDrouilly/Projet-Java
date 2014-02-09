@@ -7,6 +7,7 @@ import JobPackage.*;
 
 import java.sql.*;
 
+import javax.swing.GroupLayout;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
@@ -73,6 +74,7 @@ public class Window extends javax.swing.JFrame {
         this.setResizable(false);
         this.newPoiX = -1;
         this.newPoiY = -1;
+        
     }
     public void makeListOfRoutes() {
     	int i = 0;
@@ -123,29 +125,32 @@ public class Window extends javax.swing.JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	this.currRouteId = 0;
     }
     public void pimpMyPois(String routeName){
     	ResultSet rs = mappingRoute.getRouteByName(routeName);
         Pois.clear();
     	try {
     		rs.next();
-    		int routeId = rs.getInt("ROUTE_ID");
-			rs = mappingPoi.getPoiByRoute(routeId);
+    		this.currRouteId = rs.getInt("ROUTE_ID");
+			rs = mappingPoi.getPoiByRoute(this.currRouteId);
            try{
                while(rs.next())
                {
                    Pois.add(new Poi(rs.getInt("POI_ID")));
                }
                Map_Panel.setPois(Pois);
-               Map_Panel.revalidate();Map_Panel.repaint();
+               Map_Panel.revalidate();
+               Map_Panel.repaint();
+               selectedPoi = Pois.get(0);
+               ShowInfoPoi();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         } catch (Exception e){
         	e.printStackTrace();
-        }
-    	
+        }    	
     }
     class ActionListenerAddPOI implements ActionListener {
 
@@ -261,6 +266,7 @@ public class Window extends javax.swing.JFrame {
         Info_2.setText(selectedPoi.getLabel());
         Info_3.setText(selectedPoi.getText());
         Info_4.setText(selectedPoi.getLink());
+        Text_Information.setText(selectedPoi.getText());
         }
     }
     public void showVoidPoiInfo()
@@ -402,7 +408,7 @@ public class Window extends javax.swing.JFrame {
         newRoutePanel.add(new javax.swing.JButton("Enregistrer"), BorderLayout.SOUTH);
         
         editRoutePanel.setLayout(new BorderLayout());
-        editRoutePanel.add(new javax.swing.JLabel("Ajouter le POI actuel à l'itineraire selectionné"), BorderLayout.NORTH);
+        editRoutePanel.add(new javax.swing.JLabel("Ajouter le POI actuel à l'itineraire selectionné"), BorderLayout.SOUTH);
         
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -652,7 +658,7 @@ public class Window extends javax.swing.JFrame {
         jToolBar2.add(jPanel2);
 
         Add_Panel.addTab("Ajouter", jToolBar2);
-        Add_Panel.addTab("Itinéraires", newRoutePanel);
+        Add_Panel.addTab("Itinéraires", (currRouteId == 0)? newRoutePanel : editRoutePanel);
 
         
         Menu_Lieux.setText("Lieux");
