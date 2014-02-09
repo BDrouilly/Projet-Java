@@ -16,6 +16,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -42,6 +44,7 @@ public class Window extends javax.swing.JFrame {
     private int currMapId;
     private Poi selectedPoi;
     private String[] routesName;
+    private int currRouteId;
     
     private ArrayList<Route> Routes;
     private ArrayList<Map> Maps;
@@ -83,14 +86,66 @@ public class Window extends javax.swing.JFrame {
     		e.printStackTrace();
     	}
     	if(i > 0) {
-	    	this.routesName = new String[i];
+	    	this.routesName = new String[i + 1];
+	    	this.routesName[0] = "Carte sans itinéraire";
+ 	    	
 	    	for(int j = 0; j < i; j++){
-	    		routesName[j] = Routes.get(j).getLabel();
+	    		routesName[j+1] = Routes.get(j).getLabel();
 	    	}
     	} else {
     		this.routesName = new String[1];
     		this.routesName[0] = "Aucun itinéraire sur cette carte";
     	}
+    	Combo_Interface.addItemListener(new ItemListener(){
+
+			@Override
+			public void itemStateChanged(ItemEvent arg0) {
+				// TODO Auto-generated method stub
+				if(Combo_Interface.getSelectedIndex() != 0){
+					pimpMyPois(Combo_Interface.getSelectedItem().toString());
+				} else {
+					resetPoiToFull();
+				}
+			}
+    		
+    	});
+    }
+    public void resetPoiToFull(){
+    	ResultSet rs = mappingPoi.getPoiByMapId(currMapId);
+    	try {
+			while(rs.next()){
+                Pois.add(new Poi(rs.getInt("POI_ID")));
+			}
+			Map_Panel.setPois(Pois);
+            Map_Panel.revalidate();
+            Map_Panel.repaint();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+    public void pimpMyPois(String routeName){
+    	ResultSet rs = mappingRoute.getRouteByName(routeName);
+        Pois.clear();
+    	try {
+    		rs.next();
+    		int routeId = rs.getInt("ROUTE_ID");
+			rs = mappingPoi.getPoiByRoute(routeId);
+           try{
+               while(rs.next())
+               {
+                   Pois.add(new Poi(rs.getInt("POI_ID")));
+               }
+               Map_Panel.setPois(Pois);
+               Map_Panel.revalidate();Map_Panel.repaint();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } catch (Exception e){
+        	e.printStackTrace();
+        }
+    	
     }
     class ActionListenerAddPOI implements ActionListener {
 
@@ -132,6 +187,7 @@ public class Window extends javax.swing.JFrame {
 				Map_Panel.setPois(Pois);
 				Map_Panel.revalidate();
 				Map_Panel.repaint();
+				refreshInterface();
 			}
 			
 		}
@@ -238,18 +294,6 @@ public class Window extends javax.swing.JFrame {
         
         
     }
-    public void showListOfRoutes(){
-    	this.Combo_Interface.addActionListener(new comboActionListener());
-    }
-    class comboActionListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-    	
-    }
     
         java.awt.event.ActionListener action = new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -292,7 +336,13 @@ public class Window extends javax.swing.JFrame {
             
         }
      };
-    
+    public void refreshInterface(){
+    	/**
+    	 * TODO : add a clean refresh method
+    	 */
+        makeListOfRoutes();
+        Combo_Interface.setModel(new javax.swing.DefaultComboBoxModel(routesName));        
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -346,9 +396,13 @@ public class Window extends javax.swing.JFrame {
         Menu_POI = new javax.swing.JMenu();
         Menu_Help = new javax.swing.JMenu();
         newRoutePanel = new javax.swing.JPanel();
+        editRoutePanel = new javax.swing.JPanel();
         
         newRoutePanel.setLayout(new java.awt.BorderLayout());
         newRoutePanel.add(new javax.swing.JButton("Enregistrer"), BorderLayout.SOUTH);
+        
+        editRoutePanel.setLayout(new BorderLayout());
+        editRoutePanel.add(new javax.swing.JLabel("Ajouter le POI actuel à l'itineraire selectionné"), BorderLayout.NORTH);
         
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -673,6 +727,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JComboBox Combo_Interface;
     private javax.swing.JPanel Consult_Panel;
     private javax.swing.JPanel newRoutePanel;
+    private javax.swing.JPanel editRoutePanel;
     private javax.swing.JLabel Info_1;
     private javax.swing.JLabel Info_2;
     private javax.swing.JLabel Info_3;
