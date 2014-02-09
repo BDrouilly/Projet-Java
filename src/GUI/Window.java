@@ -35,21 +35,26 @@ public class Window extends javax.swing.JFrame {
     private ArrayList<JMenuItem> MapList;
     private MappingMap mapping;
     private MappingPoi mappingPoi;
+    private MappingRoute mappingRoute;
     private int i;
     private float newPoiX;
     private float newPoiY;
     private int currMapId;
     private Poi selectedPoi;
+    private String[] routesName;
     
+    private ArrayList<Route> Routes;
     private ArrayList<Map> Maps;
     private ArrayList<Poi> Pois;
     
    //private Graphics g = null;
     
     public Window() {
+        this.mappingRoute = new MappingRoute();
         initComponents();
         Maps = new ArrayList<Map>();
         Pois = new ArrayList<Poi>();
+        Routes = new ArrayList<Route>();
         mapping = new MappingMap(); // objet MappingMap
         mappingPoi = new MappingPoi();
        // Names = new ArrayList<String>();
@@ -65,7 +70,27 @@ public class Window extends javax.swing.JFrame {
         this.setResizable(false);
         this.newPoiX = -1;
         this.newPoiY = -1;
-        
+    }
+    public void makeListOfRoutes() {
+    	int i = 0;
+    	try {
+    		ResultSet rs = this.mappingRoute.getRouteByMapId(currMapId);
+    		while(rs.next()){
+    			this.Routes.add(new Route(rs.getInt("ROUTE_ID")));
+    			i++;
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	if(i > 0) {
+	    	this.routesName = new String[i];
+	    	for(int j = 0; j < i; j++){
+	    		routesName[j] = Routes.get(j).getLabel();
+	    	}
+    	} else {
+    		this.routesName = new String[1];
+    		this.routesName[0] = "Aucun itinéraire sur cette carte";
+    	}
     }
     class ActionListenerAddPOI implements ActionListener {
 
@@ -213,6 +238,18 @@ public class Window extends javax.swing.JFrame {
         
         
     }
+    public void showListOfRoutes(){
+    	this.Combo_Interface.addActionListener(new comboActionListener());
+    }
+    class comboActionListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+    	
+    }
     
         java.awt.event.ActionListener action = new java.awt.event.ActionListener() {
         public void actionPerformed(java.awt.event.ActionEvent e) {
@@ -226,6 +263,8 @@ public class Window extends javax.swing.JFrame {
                     currMapId = Maps.get(i).getID();
                     System.out.print("TRALALALALLA");      
                     Map_Panel.setURL(Maps.get(i).getURL());
+                    makeListOfRoutes();
+                    Combo_Interface.setModel(new javax.swing.DefaultComboBoxModel(routesName));
                     ResultSet rs = mappingPoi.getPoiByMapId(Maps.get(i).getID());
                     if(rs != null){
 	                   try{
@@ -360,7 +399,7 @@ public class Window extends javax.swing.JFrame {
 
         Navigation_Panel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
 
-        Combo_Interface.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Combo_Interface.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Selectioner une carte"}));
 
         Button_AddPOI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/GUI/Resources/addmark.PNG")));
         Button_AddPOI.setBorderPainted(false);
