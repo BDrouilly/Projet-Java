@@ -62,8 +62,8 @@ public class Panel_Picture extends JPanel {
             System.out.println(this.URL);
             this.img = ImageIO.read(new File(this.URL));
             this.imgPOI = ImageIO.read(new File("./mark.png"));
-            this.imgHighlight = ImageIO.read(new File("./icone_cafe.gif"));
-            this.imgHighlight2 = ImageIO.read(new File("./icone_cafe.gif"));
+            this.imgHighlight = ImageIO.read(new File("./mark_tour.png"));
+            this.imgHighlight2 = ImageIO.read(new File("./mark_tour.png"));
 
             g.drawImage(this.img,0,0,this);
         }
@@ -85,7 +85,7 @@ public class Panel_Picture extends JPanel {
                 
                 if(selectedPoi.getId() == poi.getId())
                 {
-                    g.drawImage(this.imgHighlight, (int)x-15, (int)y, 30, 30, this);
+                    g.drawImage(this.imgHighlight, (int)x-15, (int)y-15, 30, 30, this);
                 }
             }
         }

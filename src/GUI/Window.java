@@ -7,15 +7,22 @@ import JobPackage.*;
 
 import java.sql.*;
 
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,15 +59,16 @@ public class Window extends javax.swing.JFrame {
     private ArrayList<Route> Routes;
     private ArrayList<Map> Maps;
     private ArrayList<Poi> Pois;
+    private ArrayList<String> RoutesNames;
     
    //private Graphics g = null;
     
     public Window() {
         this.mappingRoute = new MappingRoute();
+        Routes = new ArrayList<Route>();
         initComponents();
         Maps = new ArrayList<Map>();
         Pois = new ArrayList<Poi>();
-        Routes = new ArrayList<Route>();
         mapping = new MappingMap(); // objet MappingMap
         mappingPoi = new MappingPoi();
        // Names = new ArrayList<String>();
@@ -101,7 +109,7 @@ public class Window extends javax.swing.JFrame {
 	    	}
     	} else {
     		this.routesName = new String[1];
-    		this.routesName[0] = "Aucun itinï¿½raire sur cette carte";
+    		this.routesName[0] = "Aucun itinéraire sur cette carte";
     	}
     	Combo_Interface.addItemListener(new ItemListener(){
 
@@ -178,7 +186,7 @@ public class Window extends javax.swing.JFrame {
 					Write_Nom.setText("");
 					Wrtie_Address.setText("");
 					jTextArea2.setText("");
-					JOptionPane.showMessageDialog(Map_Panel, "POI Ajoutï¿½ !");
+					JOptionPane.showMessageDialog(Map_Panel, "POI Ajouté !");
 				}
 			} else {
 				JOptionPane.showMessageDialog(Add_Panel, "Veuillez remplir les champs requis");
@@ -253,8 +261,7 @@ public class Window extends javax.swing.JFrame {
                     	Add_Panel.setSelectedIndex(1);
                     }
                 }
-            	Add_Panel.setSelectedIndex(1);
-
+            	if(Pois.size() < 1){Add_Panel.setSelectedIndex(1);}
 		}
 
 		@Override
@@ -383,7 +390,7 @@ public class Window extends javax.swing.JFrame {
     }
     public void showVoidPoiInfo()
     {
-        Info_1.setText("Aucun POI sï¿½lectionnï¿½");
+        Info_1.setText("Aucun POI sélectionné");
         Info_2.setText("");
         Info_3.setText("");
         Info_4.setText("");
@@ -396,7 +403,7 @@ public class Window extends javax.swing.JFrame {
                Maps.add(new Map(result.getInt("MAP_ID")));
              }
 
-         } catch (Exception e) { System.out.println("makeListOfMaps a chiÃ©"); e.printStackTrace();}
+         } catch (Exception e) { System.out.println("makeListOfMaps a chié"); e.printStackTrace();}
     }
     
     public void showListOfMapsInMenuBar() {
@@ -461,7 +468,29 @@ public class Window extends javax.swing.JFrame {
         makeListOfRoutes();
         Combo_Interface.setModel(new javax.swing.DefaultComboBoxModel(routesName));        
     }
-    
+    public String[] makeListeOfAllRoute(){
+    	String[] names;
+    	int i = 0;
+    	try {
+    		ResultSet rs = this.mappingRoute.getRoute();
+    		while(rs.next()){
+    			this.Routes.add(new Route(rs.getInt("ROUTE_ID")));
+    			i++;
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	if(i > 0) {
+	    	names = new String[i]; 	    	
+	    	for(int j = 0; j < i; j++){
+	    		names[j] = Routes.get(j).getLabel();
+	    	}
+    	} else {
+    		names = new String[1];
+    		names[0] = "Aucun itinéraire";
+    	}
+    	return names;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -515,13 +544,54 @@ public class Window extends javax.swing.JFrame {
         Menu_Help = new javax.swing.JMenu();
         newRoutePanel = new javax.swing.JPanel();
         editRoutePanel = new javax.swing.JPanel();
+        jtxt = new JTextField();
+        jtxt2 = new JTextField();
+        jcb = new JComboBox(new DefaultComboBoxModel(makeListeOfAllRoute()));
+        JButton jbuton = new JButton("Ajouter");
+        JButton jbuton2 = new JButton("Ajouter le POI à un itinéraire");
+        
+        this.Consult_Panel.add(jbuton2, BorderLayout.SOUTH);
+        
+        jbuton2.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				int addRouteId = -1;
+				jcb.setModel(new DefaultComboBoxModel((String[])makeListeOfAllRoute()));
+				JOptionPane.showMessageDialog(Map_Panel, jcb, "Selectionner l'itinéraire", 1);
+				ResultSet rs = mappingRoute.getRouteByName((String)jcb.getSelectedItem());
+				try {
+					rs.next();
+					addRouteId = rs.getInt("ROUTE_ID");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				mappingRoute.addPoiToRoute(addRouteId, selectedPoi.getId());
+			}
+        });
+        GridLayout gl = new GridLayout(2,2);
+        gl.setHgap(10);
+        gl.setVgap(5);
+        editRoutePanel.setLayout(gl);
+        editRoutePanel.add(new javax.swing.JLabel("Nom de l'itinéraire : "));
+        editRoutePanel.add(jtxt);
+        editRoutePanel.add(new javax.swing.JLabel("Détails : "));
+        editRoutePanel.add(jtxt2);     
         
         newRoutePanel.setLayout(new java.awt.BorderLayout());
-        newRoutePanel.add(editRoutePanel, BorderLayout.SOUTH);
-        newRoutePanel.add(new javax.swing.JLabel("Ajouter le POI actuel ï¿½ l'itineraire selectionnï¿½"), BorderLayout.SOUTH);
-
-        editRoutePanel.setLayout(new BorderLayout());
-        editRoutePanel.add(new javax.swing.JButton("Ajouter"), BorderLayout.SOUTH);
+        newRoutePanel.add(editRoutePanel, BorderLayout.CENTER);
+        newRoutePanel.add(new javax.swing.JLabel("Créer un nouvel itinéraire"), BorderLayout.NORTH);
+        newRoutePanel.add(jbuton, BorderLayout.SOUTH);
+        jbuton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e){
+        		mappingRoute.setNewRoute(jtxt.getText(), jtxt2.getText());
+        		System.out.println("inserting New Route ?");
+        		JOptionPane.showMessageDialog(Add_Panel, "Itinéraire ajouté !");
+        		refreshInterface();
+        	}
+        });
         
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -626,7 +696,6 @@ public class Window extends javax.swing.JFrame {
                 .addComponent(Combo_Interface, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(77, 77, 77))
         );
-
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
@@ -634,15 +703,15 @@ public class Window extends javax.swing.JFrame {
         Text_Information.setRows(5);
         jScrollPane2.setViewportView(Text_Information);
 
-        Info_1.setText("Info_1");
+        Info_1.setText("Aucun POI sélectionné");
 
-        Info_2.setText("Info_2");
+        Info_2.setText("");
 
-        Info_3.setText("Info_3");
+        Info_3.setText("");
 
         jLabel4.setText("Information POI");
 
-        Info_4.setText("Info_4");
+        Info_4.setText("");
 
         javax.swing.GroupLayout Consult_PanelLayout = new javax.swing.GroupLayout(Consult_Panel);
         Consult_Panel.setLayout(Consult_PanelLayout);
@@ -657,7 +726,8 @@ public class Window extends javax.swing.JFrame {
                     .addComponent(Info_4)
                     .addComponent(Info_3)
                     .addComponent(Info_2)
-                    .addComponent(Info_1))
+                    .addComponent(Info_1)
+                    .addComponent(jbuton2))
                 .addGap(68, 68, 68))
             .addGroup(Consult_PanelLayout.createSequentialGroup()
                 .addGap(81, 81, 81)
@@ -676,6 +746,8 @@ public class Window extends javax.swing.JFrame {
                 .addComponent(Info_3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Info_4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbuton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -771,7 +843,7 @@ public class Window extends javax.swing.JFrame {
         jToolBar2.add(jPanel2);
 
         Add_Panel.addTab("Ajouter", jToolBar2);
-        Add_Panel.addTab("Itinï¿½raires", (currRouteId == 0)? newRoutePanel : editRoutePanel);
+        Add_Panel.addTab("Itinéraires", (currRouteId == 0)? newRoutePanel : editRoutePanel);
 
         
         Menu_Lieux.setText("Lieux");
@@ -844,6 +916,7 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JButton Button_Next;
     private javax.swing.JButton Button_Prev;
     private javax.swing.JComboBox Combo_Interface;
+    private javax.swing.JComboBox Combo_Interface_set;
     private javax.swing.JPanel Consult_Panel;
     private javax.swing.JPanel newRoutePanel;
     private javax.swing.JPanel editRoutePanel;
@@ -881,27 +954,31 @@ public class Window extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JToolBar jToolBar2;
+    private JTextField jtxt;
+    private JTextField jtxt2;
+    private JComboBox jcb;
     // End of variables declaration//GEN-END:variables
-}
 
 
 
-/*   CODE A AJOUTER SI VOUS REGLEZ LE PROBLEME DE CES PUTAINS D'EVENT DU DESIGNER DE MERDE
+
+/*   CODE A AJOUTER SI VOUS REGLEZ LE PROBLEME DE CES PUTAINS D'EVENT DU DESIGNER DE MERDE */
 
  private void Button_PrevMouseClicked(java.awt.event.MouseEvent evt) {    //poi prÃ©cedent                                      
         if(Pois.get(Pois.indexOf(selectedPoi)-1) != null)
-            selectedPoi = Pois.get(Pois.indexOf(selectedPoi)-1);
+            selectedPoi = (Pois.indexOf(selectedPoi)-1 > 0)? Pois.get(Pois.indexOf(selectedPoi)-1) : Pois.get(Pois.size());
     }                                        
 
     private void Button_NextMouseClicked(java.awt.event.MouseEvent evt) { //poi suivant    
         if(Pois.get(Pois.indexOf(selectedPoi)+1) != null)
-            selectedPoi = Pois.get(Pois.indexOf(selectedPoi)+1);
+            selectedPoi = (Pois.indexOf(selectedPoi)+1 > Pois.size())? Pois.get(Pois.indexOf(selectedPoi)+1) : Pois.get(1);
     }   
 
-
+/*
 private void Button_RechercheMouseClicked(java.awt.event.MouseEvent evt) {  //recherche POI
         if( SearchBar.getText() != "" && currMapId > 0)
             mappingPoi.SearchPOI(SearchBar.getText(), currMapId);
     }             
-
 */
+}
+
