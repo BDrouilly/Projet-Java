@@ -248,6 +248,8 @@ public class Window extends javax.swing.JFrame {
                     	Add_Panel.setSelectedIndex(1);
                     }
                 }
+            	Add_Panel.setSelectedIndex(1);
+
 		}
 
 		@Override
