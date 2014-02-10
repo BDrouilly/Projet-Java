@@ -33,7 +33,7 @@ public class MappingRoute {
 		return this.db.getRows(this.query);
 	}
 	public ResultSet getRouteByName(String name){
-		this.query = "SELECT * FROM TB_MAP WHERE ROUTE_LABEL = '" + name + "'";
+		this.query = "SELECT * FROM TB_ROUTE WHERE ROUTE_LABEL = '" + name + "'";
 		return this.db.getRows(this.query);
 	}
 	public void setNewRoute(String text, String label){

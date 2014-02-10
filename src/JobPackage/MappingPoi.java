@@ -18,6 +18,10 @@ public class MappingPoi {
 	public MappingPoi(){
 		this.db = new DatabaseHandler();
 	}
+	public ResultSet getPoi() {
+		this.query = "SELECT * FROM TB_POI";
+		return db.getRows(this.query);
+	}
 	/**
 	 * Returns rows for given id
 	 * @param id
@@ -88,6 +92,10 @@ public class MappingPoi {
 		this.query = "SELECT * FROM TB_POI WHERE POI_LABEL = " + label;
 		return db.getRows(this.query);		
 	}        
+	public ResultSet getPoiByRoute(int routeId){
+		this.query = "SELECT * FROM APPARTENIR, TB_POI WHERE TB_POI.POI_ID = APPARTENIR.POI_ID AND ROUTE_ID = " + routeId;
+		return db.getRows(this.query);	
+	}
     public ResultSet SearchPOI(String search, String categorie, int mapID) {//fonction de recherche
 
         int i = 0; //compteur
@@ -145,15 +153,11 @@ public class MappingPoi {
                 this.db.setRows(query);
         }
         public void deletePoi(int poiId){
-            this.query = "DELETE FROM TB_POI WHERE POI_ID=" + poiId +";";
+            this.query = "DELETE FROM APPARTENIR WHERE POI_ID=" + poiId;
+            this.db.setRows(query);
+            this.query = "DELETE FROM TB_POI WHERE POI_ID=" + poiId;
             this.db.setRows(query);
 	}
-        
-        public void rapePoi(int poiId){
-            this.query = "DELETE FROM TB_POI WHERE POI_ID=" + poiId +";";
-            this.db.setRows(query);
-	}
-
 	/**
 	 * @return the query
 	 */

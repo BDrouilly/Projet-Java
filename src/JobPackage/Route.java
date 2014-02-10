@@ -1,6 +1,7 @@
 package JobPackage;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Route {
 	private int id;
@@ -27,7 +28,13 @@ public class Route {
 	private void routeBuilder(int id){
 		ResultSet result = this.mapRoute.getRouteById(id);
 		try {
-			this.id = result.getInt("ROUTE_ID");
+			result.next();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			this.id = id;
 			this.date = result.getString("ROUTE_DATE");
 			this.label = result.getString("ROUTE_LABEL");
 			this.text = result.getString("ROUTE_DESCRIPTION");
