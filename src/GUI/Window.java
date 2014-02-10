@@ -70,6 +70,8 @@ public class Window extends javax.swing.JFrame {
         this.Button_Add.addActionListener(new ActionListenerAddPOI());
         this.Button_AddPOI.addActionListener(new ActionListenerAddButton());
         this.Button_DelPOI.addActionListener(new ActionListenerDelButton());
+        this.Button_Prev.addMouseListener(new MouseListenerPrevButton());
+        this.Button_Next.addMouseListener(new MouseListenerNextButton());
         this.setSize(800,600);
         this.setResizable(false);
         this.newPoiX = -1;
@@ -255,6 +257,83 @@ public class Window extends javax.swing.JFrame {
 			// TODO Auto-generated method stub
 			
 		}
+    	
+    }
+    
+    
+     class MouseListenerNextButton implements MouseListener{
+
+    	@Override
+    	public void mouseClicked(MouseEvent e) {
+            System.out.println("yo, selected POI:"+Pois.indexOf(selectedPoi));
+    		 if(Pois.indexOf(selectedPoi)-1 >= 0)
+                 {
+                        selectedPoi = Pois.get(Pois.indexOf(selectedPoi)-1);
+                        ShowInfoPoi();
+                 }
+                 System.out.println("yo, selected POI:"+Pois.indexOf(selectedPoi));
+    	}
+        
+        @Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                
+        @Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                
+                @Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                
+                @Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+                }
+    	
+    }
+     
+     class MouseListenerPrevButton implements MouseListener{
+
+    	@Override
+    	public void mouseClicked(MouseEvent e) {
+            System.out.println("yo, selected POI:"+Pois.indexOf(selectedPoi));
+    		 if(Pois.indexOf(selectedPoi)+1 < Pois.size())
+                 {
+                        selectedPoi = Pois.get(Pois.indexOf(selectedPoi)+1);
+                        ShowInfoPoi();
+                 }
+                 System.out.println("yo, selected POI:"+Pois.indexOf(selectedPoi));
+    	}
+        
+        @Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                
+        @Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                
+                @Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+                
+                @Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+                }
     	
     }
     
