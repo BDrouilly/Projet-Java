@@ -10,6 +10,8 @@ import java.sql.*;
 import javax.swing.GroupLayout;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import java.util.ArrayList;
 import java.awt.BorderLayout;
@@ -72,6 +74,7 @@ public class Window extends javax.swing.JFrame {
         this.Button_DelPOI.addActionListener(new ActionListenerDelButton());
         this.Button_Prev.addMouseListener(new MouseListenerPrevButton());
         this.Button_Next.addMouseListener(new MouseListenerNextButton());
+        this.SearchBar.addKeyListener(new KeyListenerSearchBar());
         this.setSize(800,600);
         this.setResizable(false);
         this.newPoiX = -1;
@@ -335,6 +338,31 @@ public class Window extends javax.swing.JFrame {
 			// TODO Auto-generated method stub
                 }
     	
+    }
+     
+     
+     class KeyListenerSearchBar implements KeyListener {
+    	@Override
+    	public void keyTyped(KeyEvent e) {
+                ResultSet rst;
+                Result_Research.setText("");
+                String resultats;
+                resultats = "";
+                
+                rst = mappingPoi.SearchPOI(SearchBar.getText(), "", currMapId);
+                try{while(rst.next())
+                {
+                    resultats += rst.getString("POI_NAME") + "\n";
+                }}catch(Exception exc){exc.printStackTrace();}
+                
+                Result_Research.setText(resultats);
+    	}
+        @Override
+    	public void keyReleased(KeyEvent e) {
+    	}
+        @Override
+        public void keyPressed(KeyEvent e) {
+    	}
     }
     
    public void ShowInfoPoi()
