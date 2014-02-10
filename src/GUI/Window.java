@@ -405,10 +405,11 @@ public class Window extends javax.swing.JFrame {
         editRoutePanel = new javax.swing.JPanel();
         
         newRoutePanel.setLayout(new java.awt.BorderLayout());
-        newRoutePanel.add(new javax.swing.JButton("Enregistrer"), BorderLayout.SOUTH);
-        
+        newRoutePanel.add(editRoutePanel, BorderLayout.SOUTH);
+        newRoutePanel.add(new javax.swing.JLabel("Ajouter le POI actuel à l'itineraire selectionné"), BorderLayout.SOUTH);
+
         editRoutePanel.setLayout(new BorderLayout());
-        editRoutePanel.add(new javax.swing.JLabel("Ajouter le POI actuel à l'itineraire selectionné"), BorderLayout.SOUTH);
+        editRoutePanel.add(new javax.swing.JButton("Ajouter"), BorderLayout.SOUTH);
         
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
