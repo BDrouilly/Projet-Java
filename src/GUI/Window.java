@@ -89,14 +89,14 @@ public class Window extends javax.swing.JFrame {
     	}
     	if(i > 0) {
 	    	this.routesName = new String[i + 1];
-	    	this.routesName[0] = "Carte sans itinéraire";
+	    	this.routesName[0] = "Carte sans itinï¿½raire";
  	    	
 	    	for(int j = 0; j < i; j++){
 	    		routesName[j+1] = Routes.get(j).getLabel();
 	    	}
     	} else {
     		this.routesName = new String[1];
-    		this.routesName[0] = "Aucun itinéraire sur cette carte";
+    		this.routesName[0] = "Aucun itinï¿½raire sur cette carte";
     	}
     	Combo_Interface.addItemListener(new ItemListener(){
 
@@ -173,7 +173,7 @@ public class Window extends javax.swing.JFrame {
 					Write_Nom.setText("");
 					Wrtie_Address.setText("");
 					jTextArea2.setText("");
-					JOptionPane.showMessageDialog(Map_Panel, "POI Ajouté !");
+					JOptionPane.showMessageDialog(Map_Panel, "POI Ajoutï¿½ !");
 				}
 			} else {
 				JOptionPane.showMessageDialog(Add_Panel, "Veuillez remplir les champs requis");
@@ -185,7 +185,7 @@ public class Window extends javax.swing.JFrame {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// TODO Auto-generated method stub
-			if(JOptionPane.showConfirmDialog(Map_Panel, "Supprimer ce POI ? (Définitif)") == 0){
+			if(JOptionPane.showConfirmDialog(Map_Panel, "Supprimer ce POI ? (Dï¿½finitif)") == 0){
 				mappingPoi.deletePoi(selectedPoi.getId());
 				Pois.remove(selectedPoi);
 				showVoidPoiInfo();
@@ -258,8 +258,8 @@ public class Window extends javax.swing.JFrame {
     	
     }
     
-    public void ShowInfoPoi()
-    {
+   public void ShowInfoPoi()
+    {   
         if (selectedPoi != null)
         {
         Info_1.setText(selectedPoi.getName());
@@ -267,11 +267,14 @@ public class Window extends javax.swing.JFrame {
         Info_3.setText(selectedPoi.getText());
         Info_4.setText(selectedPoi.getLink());
         Text_Information.setText(selectedPoi.getText());
+        Map_Panel.setSelected(selectedPoi);
+        Map_Panel.revalidate();
+	Map_Panel.repaint();
         }
     }
     public void showVoidPoiInfo()
     {
-        Info_1.setText("Aucun POI sélectionné");
+        Info_1.setText("Aucun POI sï¿½lectionnï¿½");
         Info_2.setText("");
         Info_3.setText("");
         Info_4.setText("");
@@ -406,7 +409,7 @@ public class Window extends javax.swing.JFrame {
         
         newRoutePanel.setLayout(new java.awt.BorderLayout());
         newRoutePanel.add(editRoutePanel, BorderLayout.SOUTH);
-        newRoutePanel.add(new javax.swing.JLabel("Ajouter le POI actuel à l'itineraire selectionné"), BorderLayout.SOUTH);
+        newRoutePanel.add(new javax.swing.JLabel("Ajouter le POI actuel ï¿½ l'itineraire selectionnï¿½"), BorderLayout.SOUTH);
 
         editRoutePanel.setLayout(new BorderLayout());
         editRoutePanel.add(new javax.swing.JButton("Ajouter"), BorderLayout.SOUTH);
@@ -659,7 +662,7 @@ public class Window extends javax.swing.JFrame {
         jToolBar2.add(jPanel2);
 
         Add_Panel.addTab("Ajouter", jToolBar2);
-        Add_Panel.addTab("Itinéraires", (currRouteId == 0)? newRoutePanel : editRoutePanel);
+        Add_Panel.addTab("Itinï¿½raires", (currRouteId == 0)? newRoutePanel : editRoutePanel);
 
         
         Menu_Lieux.setText("Lieux");

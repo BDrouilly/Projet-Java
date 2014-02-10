@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -24,9 +25,14 @@ import javax.imageio.ImageIO;
 public class Panel_Picture extends JPanel {
     
     private static Image img = null;
-    private static Image imgPOI = null;
+    private static Image imgPOI = null; 
+    private static Image imgHighlight = null; 
+    private static Image imgHighlight2 = null; 
+
     
     private static ArrayList<Poi> pois = null;
+    
+    private Poi selectedPoi;
     
     private String URL = "";
     
@@ -43,6 +49,11 @@ public class Panel_Picture extends JPanel {
         this.img = img;
     }
     
+    public void setSelected(Poi poi)
+    {
+        this.selectedPoi = poi;
+    }
+    
     @Override
     public void paintComponent(Graphics g) {
         
@@ -50,8 +61,9 @@ public class Panel_Picture extends JPanel {
         if (this.URL != "") {        
             System.out.println(this.URL);
             this.img = ImageIO.read(new File(this.URL));
-
             this.imgPOI = ImageIO.read(new File("./mark.png"));
+            this.imgHighlight = ImageIO.read(new File("./selection.gif"));
+            this.imgHighlight2 = ImageIO.read(new File("./selection.gif"));
 
             g.drawImage(this.img,0,0,this);
         }
@@ -70,6 +82,11 @@ public class Panel_Picture extends JPanel {
                 
                 g.drawImage(this.imgPOI, (int)x-15, (int)y-30, 30, 30, this);
                 System.out.println("Affichage de POI... x="+x+"///y="+y+"////name="+poi.getName());
+                
+                if(selectedPoi.getId() == poi.getId())
+                {
+                    g.drawImage(this.imgHighlight, (int)x-15, (int)y, 30, 30, this);
+                }
             }
         }
 
