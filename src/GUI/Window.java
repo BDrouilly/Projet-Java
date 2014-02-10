@@ -59,7 +59,7 @@ public class Window extends javax.swing.JFrame {
     private ArrayList<Route> Routes;
     private ArrayList<Map> Maps;
     private ArrayList<Poi> Pois;
-    private ArrayList<String> RoutesNames;
+    //private ArrayList<String> RoutesNames;
     
    //private Graphics g = null;
     

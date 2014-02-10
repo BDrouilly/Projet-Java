@@ -37,7 +37,7 @@ public class MappingRoute {
 		return this.db.getRows(this.query);
 	}
 	public void setNewRoute(String text, String label){
-		this.query = "INSERT INTO TB_ROUTE(ROUTE_DATE, ROUTE_LABEL, ROUTE_DESCRIPTION) VALUES('" + new Date(System.currentTimeMillis()) +"', '"+ label +"', '"+ text +"')";
+		this.query = "INSERT INTO TB_ROUTE(ROUTE_DATE, ROUTE_LABEL, ROUTE_DESCRIPTION) VALUES(CURDATE(), '"+ label +"', '"+ text +"')";
 	}
 	public void addPoiToRoute(int routeId, int poiId){
 		this.query ="INSERT INTO APPARTENIR(ROUTE_ID, POI_ID) VALUES(" + routeId + ", " + poiId + ")";
