@@ -25,7 +25,7 @@ public class MappingRoute {
 	}
 	public ResultSet getRouteByMapId(int mapId){
 		this.query = "SELECT * FROM TB_ROUTE, APPARTENIR, TB_POI WHERE TB_ROUTE.ROUTE_ID = APPARTENIR.ROUTE_ID " +
-				"AND APPARTENIR.POI_ID = TB_POI.POI_ID AND TB_POI.MAP_ID = " + mapId;
+				"AND APPARTENIR.POI_ID = TB_POI.POI_ID AND TB_POI.MAP_ID = " + mapId + " GROUP BY APPARTENIR.ROUTE_ID";
 		return this.db.getRows(this.query);
 	}
 	public ResultSet getRoute(){
@@ -38,8 +38,10 @@ public class MappingRoute {
 	}
 	public void setNewRoute(String text, String label){
 		this.query = "INSERT INTO TB_ROUTE(ROUTE_DATE, ROUTE_LABEL, ROUTE_DESCRIPTION) VALUES(CURDATE(), '"+ label +"', '"+ text +"')";
+		this.db.setRows(this.query);
 	}
 	public void addPoiToRoute(int routeId, int poiId){
 		this.query ="INSERT INTO APPARTENIR(ROUTE_ID, POI_ID) VALUES(" + routeId + ", " + poiId + ")";
+		this.db.setRows(this.query);
 	}
 }

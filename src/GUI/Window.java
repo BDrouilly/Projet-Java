@@ -92,6 +92,7 @@ public class Window extends javax.swing.JFrame {
     public void makeListOfRoutes() {
     	int i = 0;
     	try {
+    		Routes.clear();
     		ResultSet rs = this.mappingRoute.getRouteByMapId(currMapId);
     		while(rs.next()){
     			this.Routes.add(new Route(rs.getInt("ROUTE_ID")));
@@ -102,7 +103,7 @@ public class Window extends javax.swing.JFrame {
     	}
     	if(i > 0) {
 	    	this.routesName = new String[i + 1];
-	    	this.routesName[0] = "Carte sans itinï¿½raire";
+	    	this.routesName[0] = "Carte sans itinéraire";
  	    	
 	    	for(int j = 0; j < i; j++){
 	    		routesName[j+1] = Routes.get(j).getLabel();
@@ -111,10 +112,10 @@ public class Window extends javax.swing.JFrame {
     		this.routesName = new String[1];
     		this.routesName[0] = "Aucun itinéraire sur cette carte";
     	}
-    	Combo_Interface.addItemListener(new ItemListener(){
+    	Combo_Interface.addActionListener(new ActionListener(){
 
 			@Override
-			public void itemStateChanged(ItemEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				if(Combo_Interface.getSelectedIndex() != 0){
 					pimpMyPois(Combo_Interface.getSelectedItem().toString());
@@ -128,6 +129,7 @@ public class Window extends javax.swing.JFrame {
     public void resetPoiToFull(){
     	ResultSet rs = mappingPoi.getPoiByMapId(currMapId);
     	try {
+    		Pois.clear();
 			while(rs.next()){
                 Pois.add(new Poi(rs.getInt("POI_ID")));
 			}
@@ -491,6 +493,29 @@ public class Window extends javax.swing.JFrame {
     	}
     	return names;
     }
+    public String[] makeListeOfRelatedRoute(){
+    	String[] names;
+    	int i = 0;
+    	try {
+    		ResultSet rs = this.mappingRoute.getRouteByMapId(currMapId);
+    		while(rs.next()){
+    			this.Routes.add(new Route(rs.getInt("ROUTE_ID")));
+    			i++;
+    		}
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	if(i > 0) {
+	    	names = new String[i]; 	    	
+	    	for(int j = 0; j < i; j++){
+	    		names[j] = Routes.get(j).getLabel();
+	    	}
+    	} else {
+    		names = new String[1];
+    		names[0] = "Aucun itinéraire";
+    	}
+    	return names;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -559,16 +584,17 @@ public class Window extends javax.swing.JFrame {
 				// TODO Auto-generated method stub
 				int addRouteId = -1;
 				jcb.setModel(new DefaultComboBoxModel((String[])makeListeOfAllRoute()));
-				JOptionPane.showMessageDialog(Map_Panel, jcb, "Selectionner l'itinéraire", 1);
-				ResultSet rs = mappingRoute.getRouteByName((String)jcb.getSelectedItem());
-				try {
-					rs.next();
-					addRouteId = rs.getInt("ROUTE_ID");
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if(JOptionPane.showConfirmDialog(Map_Panel, jcb, "Selectionner l'itinéraire", 1) == 0){
+					ResultSet rs = mappingRoute.getRouteByName((String)jcb.getSelectedItem());
+					try {
+						rs.next();
+						addRouteId = rs.getInt("ROUTE_ID");
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					mappingRoute.addPoiToRoute(addRouteId, selectedPoi.getId());
 				}
-				mappingRoute.addPoiToRoute(addRouteId, selectedPoi.getId());
 			}
         });
         GridLayout gl = new GridLayout(2,2);
